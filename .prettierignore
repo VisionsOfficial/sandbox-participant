@@ -1,0 +1,9 @@
+node_modules
+**/*/node_modules
+.git
+bin
+dist
+.fttemplates
+
+pnpm-lock.yaml
+package-lock.json
