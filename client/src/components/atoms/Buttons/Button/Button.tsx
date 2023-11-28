@@ -12,5 +12,9 @@ export const Button = (props: PropsWithChildren<ButtonProps>) => {
     const { loading, children, ...rest } = props;
 
     const classNames = `${Styles.Button} ${rest.className}`;
-    return <button className={classNames} {...rest}>{children}</button>;
+    return (
+        <button className={classNames} {...rest}>
+            {children}
+        </button>
+    );
 };

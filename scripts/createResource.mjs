@@ -84,7 +84,7 @@ inquirer.prompt(Questions).then((answers) => {
                 : undefined,
         createCRUD,
     };
-    
+
     if (options.publicRouterFileName) {
         const publicRouterContent = options.createCRUD
             ? publicRouterBoilerplate(name)
