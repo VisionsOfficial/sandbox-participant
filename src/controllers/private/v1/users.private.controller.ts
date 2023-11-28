@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { publicUserSelect } from "../../../libs/mongoose/users.mongoose";
 import { User } from "../../../models";
+import { UserMongooseUtils } from "../../../libs/mongoose/users.mongoose";
 
 /**
  * Gets the user in session
@@ -12,7 +12,7 @@ export const getCurrentUser = async (
 ) => {
     try {
         const user = await User.findById(req.session.user._id)
-            .select(publicUserSelect)
+            .select(UserMongooseUtils.publicSelect)
             .lean();
         if (!user) return res.status(404).json({ error: "User not found" });
         return user;
@@ -35,7 +35,7 @@ export const updateUserById = async (
             { ...req.body },
             { new: true, runValidators: true }
         )
-            .select(publicUserSelect)
+            .select(UserMongooseUtils.publicSelect)
             .lean();
 
         return res.json(user);
@@ -54,7 +54,7 @@ export const deleteUserById = async (
 ) => {
     try {
         const user = await User.findByIdAndDelete(req.params.userId).select(
-            publicUserSelect
+            UserMongooseUtils.publicSelect
         );
         if (!user) return res.status(404).json({ error: "User not found" });
         return res.json(user);

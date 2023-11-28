@@ -1,12 +1,21 @@
 */**/node_modules
-/node_modules
+node_modules
 dist
 dist/*
-*/**/dist
 build
-.env.*
-!.env.sample
-client/node_modules
+build/*
 logs
+logs/*
+*/**/dist
+*/**/build
+*/**/logs
+
+# Local directories
 secrets
 local
+
+# Environment
+.env*
+!.env.sample
+*/**/.env*
+!*/**/.env.sample

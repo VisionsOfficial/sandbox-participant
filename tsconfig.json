@@ -11,12 +11,8 @@
         "outDir": "dist",
         "allowJs": true,
         "lib": ["ES2021.String", "ES7"],
-        "typeRoots": [
-            "./node_modules/@types",
-            "./src/types",
-            "./src/types/models"
-        ],
+        "typeRoots": ["./src/types"],
         "resolveJsonModule": true
     },
-    "include": ["src/**/*"]
+    "include": ["src/**/*", "scripts"]
 }

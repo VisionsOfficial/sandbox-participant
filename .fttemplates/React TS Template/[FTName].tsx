@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import Styles from './[FTName].module.scss';
 
 type <FTName | capitalize>Props = {

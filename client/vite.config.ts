@@ -4,4 +4,19 @@ import react from "@vitejs/plugin-react";
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [react()],
+    build: {
+        outDir: "../dist/public",
+    },
+    server: {
+        port: parseInt(process.env.PORT) || 5173,
+        proxy: {
+            "/v1": {
+                target: process.env.API_ENDPOINT,
+                changeOrigin: true,
+                // rewrite: (path) => path.replace(/^\/api/, ""),
+                ws: true,
+                secure: false,
+            },
+        },
+    },
 });

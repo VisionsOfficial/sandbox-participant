@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 import { userSchema } from "./User.model";
-import { statics } from "./statics";
-import { methods } from "./methods";
-import { hooks } from "./hooks";
-import { virtuals } from "./virtuals";
-import { IUser, IUserModel } from "../../types/models/user";
+import { statics } from "./User.statics";
+import { methods } from "./User.methods";
+import { hooks } from "./User.hooks";
+import { virtuals } from "./User.virtuals";
+import { IUser, IUserModel } from "../../types/user";
 
 statics(userSchema);
 methods(userSchema);

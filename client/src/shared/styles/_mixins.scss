@@ -1,0 +1,77 @@
+@use './variables' as variables;
+
+// Media Query Mixins
+@mixin media-sm {
+  @media (min-width: variables.$sm-breakpoint) {
+    @content;
+  }
+}
+
+@mixin media-md {
+  @media (min-width: variables.$md-breakpoint) {
+    @content;
+  }
+}
+
+@mixin media-lg {
+  @media (min-width: variables.$lg-breakpoint) {
+    @content;
+  }
+}
+
+@mixin media-xl {
+  @media (min-width: variables.$xl-breakpoint) {
+    @content;
+  }
+}
+
+// Flexbox Centering Mixins
+@mixin center-both {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin center-horizontally {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin center-vertically {
+  display: flex;
+  align-items: center;
+}
+
+// Text Ellipsis Mixin
+@mixin text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Transition Mixin
+@mixin transition($property: all, $duration: 0.3s, $timing-function: ease-in-out) {
+  transition: $property $duration $timing-function;
+}
+
+// Box Shadow Mixin
+@mixin box-shadow($shadow) {
+  box-shadow: $shadow;
+}
+
+// Placeholder Color Mixin
+@mixin placeholder-color($color) {
+  &::placeholder {
+    color: $color;
+  }
+}
+
+// Button Styles Mixin
+@mixin button-styles($bg-color, $text-color, $hover-bg-color, $hover-text-color) {
+  background-color: $bg-color;
+  color: $text-color;
+  &:hover {
+    background-color: $hover-bg-color;
+    color: $hover-text-color;
+  }
+}

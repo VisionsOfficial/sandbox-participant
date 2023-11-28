@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { publicUserSelect } from "../../../libs/mongoose/users.mongoose";
+import { UserMongooseUtils } from "../../../libs/mongoose/users.mongoose";
 import { User } from "../../../models";
 
 /**
@@ -13,7 +13,9 @@ export const queryUserById = async (
 ) => {
     try {
         const id = req.params.userId || req.params.id || req.params.userID; // fail safe
-        const user = await User.findById(id).select(publicUserSelect);
+        const user = await User.findById(id).select(
+            UserMongooseUtils.publicSelect
+        );
         if (!user) return res.status(404).json({ error: "User not found" });
 
         req.queriedUser = user;

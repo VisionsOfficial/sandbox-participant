@@ -41,3 +41,7 @@ For some reason I can't get typescript's paths to work correctly so still using 
 Sometimes when running ts-node for development and having set custom types in a types folder declared in the typeRoots of tsconfig.json, the IDE will show everything fine but the dev start will fail due to ts-node node recognizing these types.
 
 The solution was to --transpile-only when running ts-node, so adding -T flag to the nodemon.json command
+
+## tsconfig.json and typeRoots
+
+Apparently, having a subdirecroty inside of the types directory makes typescript unable to find types that are set in that subdirectory, even if it is specified in the typeRoots attribute

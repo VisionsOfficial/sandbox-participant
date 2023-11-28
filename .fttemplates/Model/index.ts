@@ -2,12 +2,12 @@ import mongoose from "mongoose";
 import {
     I<FTName>,
     I<FTName>Model,
-} from "src/types/models/<FTName | lowercase>";
+} from "../../types/<FTName | lowercase>";
 import { <FTName | lowercasefirstchar>Schema } from "./<FTName>.model";
-import { statics } from "./statics";
+import { statics } from "./<FTName>.statics";
 import { methods } from "./methods";
-import { hooks } from "./hooks";
-import { virtuals } from "./virtuals";
+import { hooks } from "./<FTName>.hooks";
+import { virtuals } from "./<FTName>.virtuals";
 
 statics(<FTName | lowercasefirstchar>Schema);
 methods(<FTName | lowercasefirstchar>Schema);

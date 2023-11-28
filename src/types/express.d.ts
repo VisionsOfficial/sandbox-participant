@@ -1,6 +1,6 @@
 import "express";
 import { HydratedDocument } from "mongoose";
-import { IUser } from "./models/user";
+import { IUser } from "./user";
 
 declare module "express" {
     interface Request {

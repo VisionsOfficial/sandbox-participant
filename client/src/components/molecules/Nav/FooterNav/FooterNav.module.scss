@@ -1,0 +1,11 @@
+@use '../../../../shared/styles/mixins' as mixins;
+
+.FooterNav {
+    width: 100%;
+    height: 40px;
+    @include mixins.center-both;
+    position: fixed;
+    bottom: 0;
+
+    justify-content: space-evenly;
+}

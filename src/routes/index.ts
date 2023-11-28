@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
 import { Express } from "express";
-import { Logger } from "../libs/loggers";
 
 const importRouter = async (routerPath: string) => {
     const routerModule = await import(routerPath);
@@ -17,7 +16,6 @@ export const setupRoutes = async (app: Express) => {
         const accessTypeDir = path.join(routesDir, accessType);
         for (const version of fs.readdirSync(accessTypeDir)) {
             const versionDir = path.join(accessTypeDir, version);
-            Logger.debug(`Version dir found: ${versionDir}`);
             for (const routerFile of fs.readdirSync(versionDir)) {
                 const routerName = routerFile.split(".")[0];
                 const routerPath = `/${version}/${routerName}`;
@@ -44,9 +42,6 @@ export const setupRoutes = async (app: Express) => {
     // Apply routers to the app
     for (const [basePath, routers] of routerMap) {
         if (routers.private && routers.public) {
-            Logger.debug(
-                `Setting up private and public routers for app at path ${basePath}`
-            );
             app.use(basePath, routers.public, routers.private);
         } else if (routers.private) {
             app.use(basePath, routers.private);

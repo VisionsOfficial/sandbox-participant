@@ -1,0 +1,3 @@
+{
+    "openFilesWhenDone": ["<FTName | capitalize>.page.tsx"]
+}

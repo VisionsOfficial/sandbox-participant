@@ -1,1 +1,3 @@
-export const publicUserSelect = "-password";
+export class UserMongooseUtils {
+    static publicSelect = "-password";
+}

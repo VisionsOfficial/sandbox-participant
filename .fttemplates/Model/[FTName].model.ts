@@ -1,5 +1,5 @@
-import { Schema, Types } from "mongoose";
-import { I<FTName>, I<FTName>Model, I<FTName>Methods } from "src/types/models/<FTName | lowercase>";
+import { Schema } from "mongoose";
+import { I<FTName>, I<FTName>Model, I<FTName>Methods } from "../../types/<FTName | lowercase>";
 
 export const <FTName | lowercasefirstchar>Schema = new Schema<I<FTName>, I<FTName>Model, I<FTName>Methods>(
     {
