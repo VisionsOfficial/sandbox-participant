@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { UserMongooseUtils } from "../../../libs/mongoose/users.mongoose";
 import { User } from "../../../models";
+import { mongooseModelQueries } from "../../../libs/mongoose";
 
 /**
  * Queries the user by ID and provides the hydrated
@@ -14,7 +14,7 @@ export const queryUserById = async (
     try {
         const id = req.params.userId || req.params.id || req.params.userID; // fail safe
         const user = await User.findById(id).select(
-            UserMongooseUtils.publicSelect
+            mongooseModelQueries.User.publicSelect
         );
         if (!user) return res.status(404).json({ error: "User not found" });
 

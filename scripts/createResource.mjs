@@ -29,28 +29,24 @@ const Questions = [
         name: "public",
         message: "Is it a public router ?",
         default: true,
-        transformer: (answer) => (answer ? "👍" : "👎"),
     },
     {
         type: "confirm",
         name: "private",
         message: "Is it a private router ?",
         default: true,
-        transformer: (answer) => (answer ? "👍" : "👎"),
     },
     {
         type: "confirm",
         name: "controllers",
         default: true,
         message: "Create controller(s) for the router(s) ?",
-        transformer: (answer) => (answer ? "👍" : "👎"),
     },
     {
         type: "confirm",
         name: "crud",
         default: true,
         message: "Create boilerplate CRUD ?",
-        transformer: (answer) => (answer ? "👍" : "👎"),
     },
 ];
 

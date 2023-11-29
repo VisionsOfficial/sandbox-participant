@@ -4,6 +4,6 @@ import users from "./users.mongoose";
 /**
  * Queries for configured models
  */
-export const modelQueries = {
+export const mongooseModelQueries = {
     User: users,
 };

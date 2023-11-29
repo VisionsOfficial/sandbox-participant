@@ -1,7 +1,7 @@
 {
     "name": "fullstack-setup-2023",
-    "version": "1.0.3",
-    "description": "",
+    "version": "1.1.0",
+    "description": "A personal fullstack app dev environment setup",
     "main": "src/index.ts",
     "scripts": {
         "dev": "pnpm nodemon --development",
@@ -70,6 +70,7 @@
         "mongoose": "^8.0.1",
         "morgan": "^1.10.0",
         "multer": "1.4.5-lts.1",
+        "node-cache": "^5.1.2",
         "winston": "^3.11.0",
         "winston-daily-rotate-file": "^4.7.1"
     }

@@ -82,6 +82,11 @@ export const config: {
      * resource access on which the limiter is applied
      */
     rateLimitPrivateLimitPerWindowDefault: number;
+
+    /**
+     * Default Time to live value for caching in seconds
+     */
+    cacheBaseTtl: number;
 } = {
     env: "development",
     port: 3000,
@@ -99,6 +104,7 @@ export const config: {
     rateLimitPrivateWindowMinutes: 15,
     rateLimitPublicLimitPerWindow: 100,
     rateLimitPublicWindowMinutes: 15,
+    cacheBaseTtl: 600,
 };
 
 export const setupEnvironment = (customEnv?: string) => {
@@ -160,4 +166,7 @@ export const setupEnvironment = (customEnv?: string) => {
     config.rateLimitPrivateLimitPerWindowDefault =
         parseInt(process.env.RATE_LIMIT_PRIVATE_LIMIT_PER_WINDOW_DEFAULT) ||
         config.rateLimitPrivateLimitPerWindowDefault;
+
+    config.cacheBaseTtl =
+        parseInt(process.env.CACHE_BASE_TTL) || config.cacheBaseTtl;
 };
