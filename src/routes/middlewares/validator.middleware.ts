@@ -1,24 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { body, validationResult } from "express-validator";
-
-export const isNonEmptyEmail = () => {
-    return body("email", "Invalid or missing email")
-        .isEmail()
-        .notEmpty()
-        .trim();
-};
-
-export const isValidPassword = () => {
-    return body("password", "Invalid or missing password")
-        .isStrongPassword({
-            minLength: 8,
-            minNumbers: 1,
-            minLowercase: 1,
-            minUppercase: 1,
-            minSymbols: 1,
-        })
-        .trim();
-};
+import { validationResult } from "express-validator";
 
 /**
  * Checks the validation pipeline of express-validator

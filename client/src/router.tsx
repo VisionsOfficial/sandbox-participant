@@ -10,16 +10,18 @@ import { PublicLayout } from "./layouts/PublicLayout";
 import { PrivateLayout } from "./layouts/PrivateLayout";
 import { HomePage } from "./pages/Home/Home.page";
 import { DashboardPage } from "./pages/Dashboard/Dashboard.page";
+import { ExampleTodosPage } from "./pages/Examples/ExampleTodos/ExampleTodos.page";
 
 const userLoader = async () => {
     // defer continues rendering and provides data once available
     return defer({
-        user: await new Promise((resolve) => {
+        user: await new Promise(async (resolve) => {
             const user = localStorage.getItem("user");
-            if (!user) {
+            if (!user || user === "undefined" || user === "null") {
                 localStorage.setItem("user", "null");
                 resolve(null);
             }
+
             resolve(user);
         }),
     });
@@ -38,6 +40,7 @@ export const router = createBrowserRouter(
 
             <Route path="/app" element={<PrivateLayout />}>
                 <Route path="/app" element={<DashboardPage />} />
+                <Route path="/app/todos" element={<ExampleTodosPage />} />
             </Route>
         </Route>
     )

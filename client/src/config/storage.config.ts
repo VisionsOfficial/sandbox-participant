@@ -3,3 +3,8 @@ export const SessionStorageKeys = {
     locationBeforeSessionExpiration: "locPrevSessExp",
     locationBeforeError: "locPrevErr",
 };
+
+export const LocalStorageKeys = {
+    user: "user",
+    userToken: "userJWTToken",
+};

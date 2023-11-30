@@ -5,7 +5,7 @@ import {
 } from "../../types/<FTName | lowercase>";
 import { <FTName | lowercasefirstchar>Schema } from "./<FTName>.model";
 import { statics } from "./<FTName>.statics";
-import { methods } from "./methods";
+import { methods } from "./<FTName>.methods";
 import { hooks } from "./<FTName>.hooks";
 import { virtuals } from "./<FTName>.virtuals";
 

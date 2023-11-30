@@ -15,7 +15,10 @@ export const getCurrentUser = async (
             .select(mongooseModelQueries.User.publicSelect)
             .lean();
         if (!user) return res.status(404).json({ error: "User not found" });
-        return user;
+        return res.status(200).json({
+            user: { ...user, password: undefined },
+            token: req.session.user.token,
+        });
     } catch (err) {
         next(err);
     }

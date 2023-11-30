@@ -3,12 +3,13 @@ import {
     PropsWithChildren,
     useCallback,
     useContext,
+    useEffect,
     useMemo,
 } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { SessionStorageKeys } from "../config/storage.config";
-// import { useClient } from "react-api-client-provider";
+import { LocalStorageKeys, SessionStorageKeys } from "../config/storage.config";
+import { useClient } from "react-api-client-provider";
 
 type ContextValue = {
     user: any | null;
@@ -32,34 +33,46 @@ export const AuthProvider = ({
 }: PropsWithChildren<{ userData: any }>) => {
     const [user, setUser] = useLocalStorage("user", userData);
     const navigate = useNavigate();
-    // const { client } = useClient();
+    const { client } = useClient();
 
     const setUserFromServer = useCallback(async () => {
-        // const data = await client.GET(`/users/me`);
-        const data = { id: "123", email: "foo@bar.com" };
-        setUser(data);
-        return data;
+        try {
+            const res = await client.GET({ url: `/v1/users/me` });
+            const data = res.data;
+            setUser(data?.user);
+            localStorage.setItem(
+                LocalStorageKeys.user,
+                JSON.stringify(data?.user)
+            );
+            localStorage.setItem(LocalStorageKeys.userToken, data?.token);
+            return data;
+        } catch (err) {
+            console.error(err);
+            setUser(null);
+        }
     }, [setUser]);
 
     const login = useCallback(setUserFromServer, [setUserFromServer]);
     const update = useCallback(setUserFromServer, [setUserFromServer]);
 
     const logout = useCallback(async () => {
-        // try {
-        //     client.DELETE("/auth/logout");
-        // } catch (e) {
-        //     console.log(e);
-        // }
+        try {
+            client.DELETE({ url: "/v1/auth/logout" });
+        } catch (e) {
+            console.log(e);
+        }
         setUser(null);
+        localStorage.setItem(LocalStorageKeys.user, "null");
+        localStorage.setItem(LocalStorageKeys.userToken, "null");
         navigate("/", { replace: true });
     }, [navigate, setUser]);
 
     const sessionExpired = useCallback(() => {
-        // try {
-        //     client.DELETE("/auth/logout");
-        // } catch (e) {
-        //     console.log(e);
-        // }
+        try {
+            client.DELETE({ url: "/v1/auth/logout" });
+        } catch (e) {
+            console.log(e);
+        }
         sessionStorage.setItem(
             SessionStorageKeys.locationBeforeSessionExpiration,
             window.location.pathname
@@ -78,6 +91,10 @@ export const AuthProvider = ({
         }),
         [user, login, update, logout, sessionExpired]
     );
+
+    useEffect(() => {
+        console.log({ userChanged: user });
+    }, [user]);
 
     return (
         <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

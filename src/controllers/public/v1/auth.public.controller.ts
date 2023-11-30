@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { User } from "../../../models";
+import { Logger } from "../../../libs/loggers";
+import { generateSessionToken } from "../../../libs/jwt";
 
 /**
  * Signs up the user
@@ -53,9 +55,22 @@ export const login = async (
         if (!user.validatePassword(password))
             return res.status(400).json({ error: "Invalid credentials" });
 
-        req.session.user._id = user._id.toString();
+        const sessionToken = generateSessionToken(user.id).token;
 
-        return res.status(200).json({ message: "Successfully logged user in" });
+        req.session.user = {
+            _id: user.id,
+            token: sessionToken,
+        };
+
+        req.session.save();
+
+        return res.status(200).json({
+            message: "Successfully logged user in",
+            data: {
+                user: { ...user.toObject(), password: undefined },
+                token: sessionToken,
+            },
+        });
     } catch (err) {
         next(err);
     }

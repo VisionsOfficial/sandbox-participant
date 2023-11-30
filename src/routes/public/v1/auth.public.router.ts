@@ -1,9 +1,6 @@
 import { Router } from "express";
 import { body } from "express-validator";
-import {
-    isNonEmptyEmail,
-    validate,
-} from "../../middlewares/validator.middleware";
+import { validate } from "../../middlewares/validator.middleware";
 import {
     login,
     signup,
@@ -14,11 +11,8 @@ const r: Router = Router();
 r.post(
     "/login",
     [
-        isNonEmptyEmail,
-        body(
-            "password",
-            "Password is not strong enough and should include at least one uppercase, one lowercase, one number, one special character and have more than 8 characters"
-        ).isStrongPassword(),
+        body("email", "Invalid or missing email").isEmail().notEmpty().trim(),
+        body("password").isString().notEmpty().trim(),
     ],
     validate,
     login
@@ -27,7 +21,7 @@ r.post(
 r.post(
     "/signup",
     [
-        isNonEmptyEmail,
+        body("email", "Invalid or missing email").isEmail().notEmpty().trim(),
         body(
             "password",
             "Password is not strong enough and should include at least one uppercase, one lowercase, one number, one special character and have more than 8 characters"

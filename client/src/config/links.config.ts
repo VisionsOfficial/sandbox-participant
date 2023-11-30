@@ -4,5 +4,8 @@ export const AppLinks = {
     },
     private: {
         home: "/app",
+        examples: {
+            todos: "/app/todos",
+        },
     },
 };
