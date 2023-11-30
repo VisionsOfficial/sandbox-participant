@@ -136,7 +136,7 @@ export const getUser${capitalized} = async (
 ) => {
     try {
         const ${name} = await ${capitalized}.find({ user: req.session.user._id }).lean();
-        return res.json(todos);
+        return res.json(${name});
     } catch (err) {
         next(err);
     }

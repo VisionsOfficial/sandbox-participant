@@ -15,6 +15,11 @@ import { exec } from "child_process";
 import { frontendAPIResource } from "./generators/frontendAPIResource.mjs";
 import { capitalize } from "./utils.mjs";
 import { useResource } from "./generators/useResource.mjs";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const fsPromises = fs.promises;
 
@@ -96,6 +101,7 @@ const cacheEventPath = "./src/libs/cache/events/";
 const cacheKeysFile = "./src/libs/cache/cache.keys.ts";
 const apiFilePath = "./client/src/api/";
 const tanstackPath = "./client/src/hooks/";
+const cacheHandlersFile = "./src/libs/cache/events/index.ts";
 
 const writeToCacheKeys = (name) => {
     fs.readFile(cacheKeysFile, "utf8", (err, data) => {
@@ -132,6 +138,50 @@ const createCacheEvents = (name) => {
         .catch((err) =>
             console.error(`❌ Error creating cache events: ${err}`)
         );
+};
+
+const createCacheHandler = (name) => {
+    const importStatement = `import { ${name}CacheEventCallbackHandler } from "./cache.${name}.events";`;
+
+    const filePath = path.join(
+        __dirname,
+        "..",
+        "src",
+        "libs",
+        "cache",
+        "events",
+        "index.ts"
+    );
+
+    // Read the content of the file
+    fs.promises
+        .readFile(filePath, "utf8")
+        .then((data) => {
+            // Check if the import statement already exists
+            if (data.includes(importStatement)) {
+                console.log(`Import statement for ${name} already exists.`);
+            } else {
+                // Add the import statement at the top of the file
+                const modifiedData = `${importStatement}\n${data}`;
+
+                // Write the modified content back to the file
+                return fs.promises.writeFile(filePath, modifiedData, "utf8");
+            }
+        })
+        .then(() => {
+            console.log(
+                `\n Import statement for ${name} added successfully.\n`
+            );
+            console.log(
+                `------------------------- 🚨🚨🚨 -------------------------`
+            );
+            console.log(
+                `The cache handler was not added automatically to ${filePath}. Please add it yourself. \n\n`
+            );
+        })
+        .catch((err) => {
+            console.error(err);
+        });
 };
 
 const createResourceFile = (
@@ -208,6 +258,7 @@ const run = async () => {
     if (createCache) {
         writeToCacheKeys(name);
         createCacheEvents(name);
+        createCacheHandler(name);
     }
 
     if (createAPIFile) {

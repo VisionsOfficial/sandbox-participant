@@ -51,21 +51,21 @@ export const use${capitalized} = (options: ${capitalized}QueryOptions) => {
     });
 
     const mutationCreate = useMutation({
-        mutationFn: create${capitalized},
+        mutationFn: create${capitalizedSingular},
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: [${name.toUpperCase()}_KEY] });
         },
     });
 
     const mutationUpdate = useMutation({
-        mutationFn: update${capitalized},
+        mutationFn: update${capitalizedSingular},
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: [${name.toUpperCase()}_KEY] });
         },
     });
 
     const mutationDelete = useMutation({
-        mutationFn: delete${capitalized},
+        mutationFn: delete${capitalizedSingular},
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: [${name.toUpperCase()}_KEY] });
         },

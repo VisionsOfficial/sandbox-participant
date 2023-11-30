@@ -5,8 +5,7 @@ export const frontendAPIResource = (name, options) => {
     const { capitalized, capitalizedSingular, singular } =
         getNameVariants(name);
 
-    return `
-    import { config } from "../config/environment.config";
+    return `import { config } from "../config/environment.config";
 import { APIDocument } from "../types";
 import { I${capitalizedSingular} } from "../../../src/types/${singular}";
 import { APIClient } from "react-api-client-provider";

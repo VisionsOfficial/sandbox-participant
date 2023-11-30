@@ -2,7 +2,8 @@ import { getNameVariants } from "../utils.mjs";
 
 export const cacheResource = (name) => {
     console.log(`🔨 Generating cache events boilerplate for ${name}`);
-    const { capitalized, capitalizedSingular, singular } = getNameVariants();
+    const { capitalized, capitalizedSingular, singular } =
+        getNameVariants(name);
 
     return `import { Logger } from "../../loggers";
 import { CacheKeys } from "../cache.keys";
