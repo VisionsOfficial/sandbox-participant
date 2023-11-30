@@ -10,3 +10,4 @@ pnpm-lock.yaml
 scripts/*
 .fttemplates/*
 client/*
+*/**/logs/*

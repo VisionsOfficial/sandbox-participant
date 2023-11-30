@@ -3,6 +3,7 @@ node_modules
 .git
 bin
 dist
+*/**/logs/*
 .fttemplates
 
 pnpm-lock.yaml

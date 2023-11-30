@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import { User } from "../../../models";
-import { AppCache } from "../../../libs/cache";
 import { Logger } from "../../../libs/loggers";
 import { formatTimestamp } from "../../../functions/date.functions";
 import { mongooseModelQueries } from "../../../libs/mongoose";
+import { AppCache } from "../../../libs/cache";
 
 /**
  * Gets all users
