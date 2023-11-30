@@ -19,7 +19,7 @@
         "i18next": "^23.7.6",
         "i18next-http-backend": "^2.4.2",
         "react": "^18.2.0",
-        "react-api-client-provider": "link:F:/felix/Documents/Code/Perso/ReactLibs/apiklient",
+        "react-api-client-provider": "^1.2.0",
         "react-dom": "^18.2.0",
         "react-helmet": "^6.1.0",
         "react-i18next": "^13.5.0",
