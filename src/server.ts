@@ -20,13 +20,19 @@ export const startServer = async (port?: number) => {
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
 
+    app.get("/", async (req: Request, res: Response) => {
+        return res.status(200).send("Welcome to the API");
+    });
+
     app.get("/health", (req: Request, res: Response) => {
         return res.status(200).send("OK");
     });
 
-    app.get("/env", (req: Request, res: Response) => {
-        return res.json(config);
-    });
+    if (config.env === "development") {
+        app.get("/env", async (req: Request, res: Response) => {
+            return res.json(config);
+        });
+    }
 
     app.use(setupSession());
 

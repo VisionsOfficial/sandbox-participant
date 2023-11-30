@@ -82,6 +82,40 @@ export const config: {
      * resource access on which the limiter is applied
      */
     rateLimitPrivateLimitPerWindowDefault: number;
+
+    /**
+     * Default Time to live value for caching in seconds
+     */
+    cacheBaseTtl: number;
+
+    emails: {
+        mailchimp: {
+            /**
+             * Mailchimp API Key
+             */
+            mailchimpAPIKey: string;
+
+            /**
+             * Mailchimp transactional API Key
+             */
+            mandrillAPIKey: string;
+
+            /**
+             * Mailchimp transactional From Email
+             */
+            mandrillFromMail: string;
+
+            /**
+             * Mailchimp transactional From Name
+             */
+            mandrillFromName: string;
+        };
+        nodemailer: {
+            service: string;
+            user: string;
+            pass: string;
+        };
+    };
 } = {
     env: "development",
     port: 3000,
@@ -99,6 +133,20 @@ export const config: {
     rateLimitPrivateWindowMinutes: 15,
     rateLimitPublicLimitPerWindow: 100,
     rateLimitPublicWindowMinutes: 15,
+    cacheBaseTtl: 600,
+    emails: {
+        mailchimp: {
+            mailchimpAPIKey: "",
+            mandrillAPIKey: "",
+            mandrillFromMail: "",
+            mandrillFromName: "",
+        },
+        nodemailer: {
+            service: "gmail",
+            user: "",
+            pass: "",
+        },
+    },
 };
 
 export const setupEnvironment = (customEnv?: string) => {
@@ -160,4 +208,32 @@ export const setupEnvironment = (customEnv?: string) => {
     config.rateLimitPrivateLimitPerWindowDefault =
         parseInt(process.env.RATE_LIMIT_PRIVATE_LIMIT_PER_WINDOW_DEFAULT) ||
         config.rateLimitPrivateLimitPerWindowDefault;
+
+    config.cacheBaseTtl =
+        parseInt(process.env.CACHE_BASE_TTL) || config.cacheBaseTtl;
+
+    // ---------------------
+    // ------ EMAILS -------
+    // ---------------------
+    config.emails.mailchimp = {
+        mailchimpAPIKey:
+            process.env.MAILCHIMP_API_KEY ||
+            config.emails.mailchimp.mailchimpAPIKey,
+        mandrillAPIKey:
+            process.env.MANDRILL_API_KEY ||
+            config.emails.mailchimp.mandrillAPIKey,
+        mandrillFromMail:
+            process.env.MANDRILL_FROM_MAIL ||
+            config.emails.mailchimp.mandrillFromMail,
+        mandrillFromName:
+            process.env.MANDRILL_FROM_NAME ||
+            config.emails.mailchimp.mandrillFromName,
+    };
+
+    config.emails.nodemailer = {
+        service:
+            process.env.NODEMAILER_SERVICE || config.emails.nodemailer.service,
+        user: process.env.NODEMAILER_USER,
+        pass: process.env.NODEMAILER_PASS,
+    };
 };

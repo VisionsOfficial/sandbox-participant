@@ -12,6 +12,9 @@ logs/*
 
 # Local directories
 secrets
+src/secrets/*
+!src/secrets
+!src/secrets/README.md
 local
 
 # Environment

@@ -30,6 +30,28 @@ If pnpm is not installed, you can install it using npm
 npm i -g pnpm
 ```
 
+# Scripts and helpers
+
+## Boilerplate generation
+
+### Folder Templates
+
+Making use of the vs code folder templates extension to easily create folder structures with boilerplate code. Templates are available for both React and Backend stuff, especially creating a new mongoose model with all files associated to it.
+
+### Custom Scripts
+
+| command                              | what it does                                                                                                                                                                                                 |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `pnpm setup:model --model=modelName` | To run after creating a model with folder templates to configure the models/index.ts and move the types to the types folder automatically                                                                    |
+| `pnpm create:router`                 | Will start a CLI tool that will guide in the creation of files and boilerplate for a new resource. Can create routes and controllers automatically and set them up to be directly served by the application. |
+
+# Git Hooks
+
+Using custom git hooks to try not to use husky and have more control over what's happening in there. Set up git-hooks for:
+
+-   pre-commit: Runs lint / prettier / tests
+-   pre-push: Runs version checking to compare remote branch version with local branch version
+
 # Configuration Caveats and Pending issues
 
 ## Typescript Paths

@@ -93,6 +93,9 @@ const loggerTransports = [
         ...dailyTransportOptions("http"),
     }),
     new DailyRotateFile({
+        ...dailyTransportOptions("info"),
+    }),
+    new DailyRotateFile({
         maxFiles: "14d",
         maxSize: "20m",
         filename: path.join(__dirname, "../logs/all/all_%DATE%.log"),
