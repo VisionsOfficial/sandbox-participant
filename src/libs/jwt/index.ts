@@ -18,6 +18,14 @@ export const generateBearerToken = (userId: string) => {
 };
 
 /**
+ * Generates a token for the client user's session
+ * TODO make a env var for client session token expiration
+ */
+export const generateSessionToken = (userId: string) => {
+    return generateBearerToken(userId);
+};
+
+/**
  * Refreshes the authorization bearer token
  * @param refreshToken The input refresh token to verify
  */

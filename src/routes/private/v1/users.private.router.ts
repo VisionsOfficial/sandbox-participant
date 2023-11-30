@@ -5,13 +5,9 @@ import {
     getCurrentUser,
     updateUserById,
 } from "../../../controllers/private/v1/users.private.controller";
-import {
-    isNonEmptyEmail,
-    isValidPassword,
-    validate,
-} from "../../middlewares/validator.middleware";
+import { validate } from "../../middlewares/validator.middleware";
 import { queryUserById } from "../../middlewares/queries/userQueries.middleware";
-import { param } from "express-validator";
+import { body, param } from "express-validator";
 
 const r: Router = Router();
 
@@ -20,7 +16,7 @@ r.use(authenticate);
 r.get("/me", getCurrentUser);
 r.put(
     "/:userId",
-    [isNonEmptyEmail, isValidPassword],
+    [body("email").optional().isEmail()],
     validate,
     queryUserById,
     updateUserById

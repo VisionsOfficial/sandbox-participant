@@ -4,7 +4,7 @@ import { NextFunction, Request, Response } from "express-serve-static-core";
  * The list of Parameter names that are used in routers
  * that the passthrough is aware of and should process
  */
-const KNOWN_PARAM_NAMES = ["id", "userId"];
+const KNOWN_PARAM_NAMES = ["id", "userId", "todoId"];
 
 /**
  * This middleware enables a request made to /me that

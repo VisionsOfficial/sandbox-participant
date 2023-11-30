@@ -1,8 +1,11 @@
 import express, { Request, Response } from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
 import { IncomingMessage, Server, ServerResponse } from "http";
 import { config } from "./config/environment";
 import { setupSession } from "./config/session";
 import { setupRoutes } from "./routes";
+import { morganLogs } from "./libs/loggers";
 
 export type AppServer = {
     app: express.Application;
@@ -17,6 +20,8 @@ export type AppServer = {
 export const startServer = async (port?: number) => {
     const app = express();
 
+    app.use(cors({ origin: true, credentials: true }));
+    app.use(cookieParser());
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
 
@@ -35,6 +40,7 @@ export const startServer = async (port?: number) => {
     }
 
     app.use(setupSession());
+    app.use(morganLogs);
 
     await setupRoutes(app);
 

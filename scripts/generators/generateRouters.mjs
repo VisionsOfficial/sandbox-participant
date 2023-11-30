@@ -1,6 +1,6 @@
-import { capitalize, getNameVariants } from "./utils.mjs";
+import { getNameVariants } from "../utils.mjs";
 
-export const publicRouterBoilerplate = (name) => {
+export const publicRouterBoilerplate = (name, options) => {
     console.log(`🔨 Generating public router boilerplate for ${name}`);
     const { capitalized, capitalizedSingular, singular } =
         getNameVariants(name);
@@ -12,14 +12,17 @@ import {
     getAll${capitalized},
     get${capitalizedSingular}ById,
 } from "../../../controllers/public/v1/${name}.public.controller";
-import { passthroughMe } from "../../middlewares/passthrough.middleware";
+${
+    options?.hasMeAccess &&
+    `import { passthroughMe } from "../../middlewares/passthrough.middleware";`
+}
 
 const r: Router = Router();
 
 r.get("/", getAll${capitalized});
 r.get(
     "/:${singular}Id",
-    passthroughMe,
+${options?.hasMeAccess && `    passthroughMe,`}
     [param("${singular}Id").isMongoId()],
     validate,
     get${capitalizedSingular}ById
@@ -29,7 +32,7 @@ export default r;
 `;
 };
 
-export const privateRouterBoilerplate = (name) => {
+export const privateRouterBoilerplate = (name, options) => {
     console.log(`🔨 Generating private router boilerplate for ${name}`);
     const { capitalized, capitalizedSingular, singular } =
         getNameVariants(name);
@@ -38,24 +41,20 @@ export const privateRouterBoilerplate = (name) => {
 import { authenticate } from "../../middlewares/auth.middleware";
 import {
     delete${capitalizedSingular}ById,
-    getCurrent${capitalizedSingular},
+${options?.hasMeAccess && `    getUser${capitalized},`}
     update${capitalizedSingular}ById,
 } from "../../../controllers/private/v1/${name}.private.controller";
-import {
-    isNonEmptyEmail,
-    isValidPassword,
-    validate,
-} from "../../middlewares/validator.middleware";
+import { validate } from "../../middlewares/validator.middleware";
 import { param } from "express-validator";
 
 const r: Router = Router();
 
 r.use(authenticate);
 
-r.get("/me", getCurrent${capitalizedSingular});
+${options?.hasMeAccess && `r.get("/me", getUser${capitalized});`}
 r.put(
     "/:${singular}Id",
-    [isNonEmptyEmail, isValidPassword],
+    [],
     validate,
     update${capitalizedSingular}ById
 );
@@ -117,7 +116,7 @@ export const get${capitalizedSingular}ById = async (
 `;
 };
 
-export const privateControllerBoilerplate = (name) => {
+export const privateControllerBoilerplate = (name, options) => {
     console.log(`🔨 Generating private controller boilerplate for ${name}`);
     const { capitalized, capitalizedSingular, singular } =
         getNameVariants(name);
@@ -125,23 +124,24 @@ export const privateControllerBoilerplate = (name) => {
     return `import { NextFunction, Request, Response } from "express";
 import { ${capitalizedSingular} } from "../../../models";
 
-/**
+${
+    options?.hasMeAccess &&
+    `/**
  * Gets the ${singular} in session
  */
-export const getCurrent${capitalizedSingular} = async (
+export const getUser${capitalized} = async (
     req: Request,
     res: Response,
     next: NextFunction
 ) => {
     try {
-        const ${singular} = await ${capitalizedSingular}.findById(req.session.user._id)
-            .lean();
-        if (!${singular}) return res.status(404).json({ error: "${capitalizedSingular} not found" });
-        return ${singular};
+        const ${name} = await ${capitalized}.find({ user: req.session.user._id }).lean();
+        return res.json(${name});
     } catch (err) {
         next(err);
     }
-};
+};`
+}
 
 /**
  * Updates a ${singular} by ID
