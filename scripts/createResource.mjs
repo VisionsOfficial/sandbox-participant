@@ -345,7 +345,11 @@ const run = async () => {
             return;
         }
         console.log(
-            `🏆 Job complete !\nMake sure to go in and make the necessary adjustments for the new resource.`
+            `🏆 Job complete !\nMake sure to go in and make the necessary adjustments for the new resource. ${
+                hasMeAccess
+                    ? "The passthrough middleware should be updated manually with the new known key."
+                    : ""
+            }`
         );
     });
 };
