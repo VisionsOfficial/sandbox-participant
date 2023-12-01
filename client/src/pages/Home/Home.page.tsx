@@ -1,10 +1,9 @@
 import Styles from "./HomePage.module.scss";
 import { Button } from "../../components/atoms/Buttons/Button/Button";
 import { useAuth } from "../../contexts/AuthProvider";
-import { login } from "../../api/auth.api";
 
 export const HomePage = () => {
-    const { login: sessionRefresh } = useAuth();
+    const { login } = useAuth();
 
     return (
         <div className={Styles.HomePage}>
@@ -12,11 +11,7 @@ export const HomePage = () => {
             <Button
                 onClick={async () => {
                     try {
-                        await login({
-                            email: "johndoe@example.com",
-                            password: "@Password123!",
-                        });
-                        sessionRefresh();
+                        await login("johndoe@example.com", "@Password123!");
                     } catch (err) {
                         console.error(err);
                     }

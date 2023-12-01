@@ -15,7 +15,7 @@ r.use(authenticate);
 
 r.get("/me", getUserTodos);
 r.post(
-    "/:todoId",
+    "/",
     [body("name").exists().isString().trim().notEmpty()],
     validate,
     createTodo

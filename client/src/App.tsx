@@ -7,10 +7,13 @@ export const App = () => {
     return (
         <APIClientProvider
             baseURL={config.apiURL}
-            requestInterceptors={(opts) => ({
-                ...opts,
-                withCredentials: true,
-            })}
+            requestInterceptors={(opts) => {
+                console.log(opts);
+                return {
+                    ...opts,
+                    withCredentials: true,
+                };
+            }}
             responseInterceptors={(res) => {
                 console.log(res);
                 return res;

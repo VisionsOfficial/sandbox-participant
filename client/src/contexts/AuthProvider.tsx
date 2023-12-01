@@ -13,7 +13,7 @@ import { useClient } from "react-api-client-provider";
 
 type ContextValue = {
     user: any | null;
-    login: () => void;
+    login: (email: string, password: string) => void;
     update: () => void;
     logout: () => void;
     sessionExpired: () => void;
@@ -37,7 +37,10 @@ export const AuthProvider = ({
 
     const setUserFromServer = useCallback(async () => {
         try {
-            const res = await client.GET({ url: `/v1/users/me` });
+            const res = await client.GET({
+                url: `/v1/users/me`,
+                withCredentials: true,
+            });
             const data = res.data;
             setUser(data?.user);
             localStorage.setItem(
@@ -52,8 +55,22 @@ export const AuthProvider = ({
         }
     }, [setUser]);
 
-    const login = useCallback(setUserFromServer, [setUserFromServer]);
     const update = useCallback(setUserFromServer, [setUserFromServer]);
+
+    const login = async (email: string, password: string) => {
+        const res = await client.POST({
+            url: "/v1/auth/login",
+            data: { email, password },
+        });
+        const data = res.data;
+        setUser(data?.data?.user);
+        localStorage.setItem(
+            LocalStorageKeys.user,
+            JSON.stringify(data?.data?.user)
+        );
+        localStorage.setItem(LocalStorageKeys.userToken, data?.data?.token);
+        return data;
+    };
 
     const logout = useCallback(async () => {
         try {
