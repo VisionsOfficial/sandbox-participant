@@ -13,8 +13,9 @@ import {
     get${capitalizedSingular}ById,
 } from "../../../controllers/public/v1/${name}.public.controller";
 ${
-    options?.hasMeAccess &&
-    `import { passthroughMe } from "../../middlewares/passthrough.middleware";`
+    options?.hasMeAccess
+        ? `import { passthroughMe } from "../../middlewares/passthrough.middleware";`
+        : ""
 }
 
 const r: Router = Router();
@@ -51,7 +52,7 @@ const r: Router = Router();
 
 r.use(authenticate);
 
-${options?.hasMeAccess && `r.get("/me", getUser${capitalized});`}
+${options?.hasMeAccess ? `r.get("/me", getUser${capitalized});` : ""}
 r.put(
     "/:${singular}Id",
     [],
@@ -125,8 +126,8 @@ export const privateControllerBoilerplate = (name, options) => {
 import { ${capitalizedSingular} } from "../../../models";
 
 ${
-    options?.hasMeAccess &&
-    `/**
+    options?.hasMeAccess
+        ? `/**
  * Gets the ${singular} in session
  */
 export const getUser${capitalized} = async (
@@ -141,6 +142,7 @@ export const getUser${capitalized} = async (
         next(err);
     }
 };`
+        : ""
 }
 
 /**

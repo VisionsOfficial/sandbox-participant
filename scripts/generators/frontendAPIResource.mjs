@@ -16,11 +16,12 @@ const ${name}Client = new APIClient({
 });
 
 ${
-    options?.hasMeAccess &&
-    `export const getUser${capitalized} = async () => {
+    options?.hasMeAccess
+        ? `export const getUser${capitalized} = async () => {
     const res = await ${name}Client.GET({ url: "/me" });
     return res?.data as APIDocument<I${capitalizedSingular}>[];
 };`
+        : ""
 }
 
 export const create${capitalizedSingular} = async ({ name }: Pick<I${capitalizedSingular}, "name">) => {
