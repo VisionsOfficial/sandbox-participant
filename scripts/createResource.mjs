@@ -164,20 +164,21 @@ const createCacheHandler = (name) => {
                 // Add the import statement at the top of the file
                 const modifiedData = `${importStatement}\n${data}`;
 
+                // Find the location where add the new key-value pair
+                const insertIndex = modifiedData.indexOf("};") - 1;
+                const newLine = `    ${name}CacheEventCallbackHandler,\n`;
+
+                const updatedData =
+                    modifiedData.slice(0, insertIndex) +
+                    newLine +
+                    modifiedData.slice(insertIndex);
+
                 // Write the modified content back to the file
-                return fs.promises.writeFile(filePath, modifiedData, "utf8");
+                return fs.promises.writeFile(filePath, updatedData, "utf8");
             }
         })
         .then(() => {
-            console.log(
-                `\n Import statement for ${name} added successfully.\n`
-            );
-            console.log(
-                `------------------------- 🚨🚨🚨 -------------------------`
-            );
-            console.log(
-                `The cache handler was not added automatically to ${filePath}. Please add it yourself. \n\n`
-            );
+            console.log(`👌 Created and added Cache Event Handler`);
         })
         .catch((err) => {
             console.error(err);
