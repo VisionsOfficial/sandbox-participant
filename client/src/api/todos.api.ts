@@ -13,6 +13,11 @@ export const getUserTodos = async () => {
     return res?.data as APIDocument<ITodo>[];
 };
 
+export const getTodos = async () => {
+    const res = await todosClient.GET({ url: "/" });
+    return res?.data as APIDocument<ITodo>[];
+};
+
 export const createTodo = async ({ name }: Pick<ITodo, "name">) => {
     try {
         const res = await todosClient.POST({ url: "/", data: { name } });

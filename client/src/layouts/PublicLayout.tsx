@@ -1,10 +1,10 @@
-import { useAuth } from "../contexts/AuthProvider";
+import { useAuth } from "../auth/AuthProvider";
 import { Navigate, Outlet } from "react-router-dom";
 
 export const PublicLayout = () => {
-    const { user } = useAuth();
+    const { session } = useAuth();
 
-    if (user) {
+    if (session) {
         return <Navigate to="/app/" />;
     }
 

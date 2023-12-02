@@ -1,15 +1,15 @@
-import { PropsWithChildren } from "react";
 import Styles from "./DashboardPage.module.scss";
 import { Link } from "react-router-dom";
-import { AppLinks } from "../../config/links.config";
+import { APP_LINK } from "../../constants/appLinks";
+import { Button } from "../../components/atoms/Buttons/Button/Button";
 
-type DashboardPageProps = {};
-
-export const DashboardPage = (props: PropsWithChildren<DashboardPageProps>) => {
+export const DashboardPage = () => {
     return (
         <div className={Styles.DashboardPage}>
-            <h1>Dashboard Page</h1>
-            <Link to={AppLinks.private.examples.todos}>Examples Todos</Link>
+            <h1>Dashboard</h1>
+            <Button>
+                <Link to={APP_LINK.private.examples.todos}>Examples Todos</Link>
+            </Button>
         </div>
     );
 };

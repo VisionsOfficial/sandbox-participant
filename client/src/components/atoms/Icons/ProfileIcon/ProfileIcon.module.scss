@@ -1,0 +1,18 @@
+$size: 30px;
+
+.ProfileIcon {
+    padding: var(--space-sm);
+    margin-left: var(--space-md);
+    background-color: var(--color-accent);
+    height: $size;
+    width: $size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(90%);
+    }
+}

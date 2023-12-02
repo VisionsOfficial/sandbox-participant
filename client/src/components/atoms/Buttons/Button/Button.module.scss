@@ -1,2 +1,39 @@
 .Button {
+    cursor: pointer;
+    border: none;
+}
+
+.circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    padding: 10px;
+}
+
+.primary {
+    background-color: var(--color-primary);
+    color: var(--text-on-primary);
+
+    a {
+        color: var(--text-on-primary);
+    }
+}
+
+.secondary {
+    background-color: var(--color-secondary);
+    color: var(--text-secondary);
+
+    a {
+        color: var(--text-secondary);
+    }
+}
+
+.accent {
+    background-color: var(--color-accent);
+    color: var(--text-on-primary);
+
+    a {
+        color: var(--text-on-primary);
+    }
 }

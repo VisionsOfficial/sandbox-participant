@@ -10,7 +10,7 @@ const KNOWN_PARAM_NAMES = ["id", "userId", "todoId"];
  * This middleware enables a request made to /me that
  * should require authentication to not be blocked by
  * the /:id request when it exists for the resource in
- * the public router. This
+ * the public router.
  */
 export const passthroughMe = async (
     req: Request,

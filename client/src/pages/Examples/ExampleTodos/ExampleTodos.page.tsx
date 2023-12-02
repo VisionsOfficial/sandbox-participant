@@ -95,7 +95,7 @@ export const ExampleTodosPage = () => {
             <Button
                 onClick={() => {
                     // Type infered from the mutationFn params
-                    mutationCreate.mutate({ name: "Test new Todo" });
+                    mutationCreate.mutate({ name: newTodoTitle });
                 }}
             >
                 Add Todo

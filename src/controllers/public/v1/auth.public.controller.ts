@@ -1,12 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import { User } from "../../../models";
-import { Logger } from "../../../libs/loggers";
 import { generateSessionToken } from "../../../libs/jwt";
 
 /**
  * Signs up the user
  */
-export const signup = async (
+export const register = async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -25,9 +24,21 @@ export const signup = async (
         const user = new User({ email, password });
         await user.save();
 
-        return res.status(201).json({
-            message: "Successfully registered user",
-            data: { ...user.toObject(), password: undefined },
+        const sessionToken = generateSessionToken(user.id).token;
+
+        req.session.user = {
+            _id: user.id,
+            token: sessionToken,
+        };
+
+        req.session.save();
+
+        return res.status(200).json({
+            message: "Successfully registered user & initialized session",
+            data: {
+                user: { ...user.toObject(), password: undefined },
+                token: sessionToken,
+            },
         });
     } catch (err) {
         next(err);

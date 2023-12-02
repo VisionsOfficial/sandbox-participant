@@ -3,7 +3,7 @@ import { body } from "express-validator";
 import { validate } from "../../middlewares/validator.middleware";
 import {
     login,
-    signup,
+    register,
 } from "../../../controllers/public/v1/auth.public.controller";
 
 const r: Router = Router();
@@ -19,7 +19,7 @@ r.post(
 );
 
 r.post(
-    "/signup",
+    "/register",
     [
         body("email", "Invalid or missing email").isEmail().notEmpty().trim(),
         body(
@@ -28,7 +28,7 @@ r.post(
         ).isStrongPassword(),
     ],
     validate,
-    signup
+    register
 );
 
 export default r;
