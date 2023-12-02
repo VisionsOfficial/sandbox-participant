@@ -2,7 +2,6 @@ import {
     Route,
     createBrowserRouter,
     createRoutesFromElements,
-    defer,
 } from "react-router-dom";
 import { AuthLayout } from "./layouts/AuthLayout";
 import { ErrorPage } from "./pages/Error/Error.page";
@@ -11,36 +10,27 @@ import { PrivateLayout } from "./layouts/PrivateLayout";
 import { HomePage } from "./pages/Home/Home.page";
 import { DashboardPage } from "./pages/Dashboard/Dashboard.page";
 import { ExampleTodosPage } from "./pages/Examples/ExampleTodos/ExampleTodos.page";
-
-const userLoader = async () => {
-    // defer continues rendering and provides data once available
-    return defer({
-        user: await new Promise(async (resolve) => {
-            const user = localStorage.getItem("user");
-            if (!user || user === "undefined" || user === "null") {
-                localStorage.setItem("user", "null");
-                resolve(null);
-            }
-
-            resolve(user);
-        }),
-    });
-};
+import { APP_LINK } from "./constants/appLinks";
+import { ExampleTodoPage } from "./pages/Examples/ExampleTodo/ExampleTodo.page";
+import { SignInPage } from "./pages/Auth/SignIn/SignIn.page";
+import { SignUpPage } from "./pages/Auth/SignUp/SignUp.page";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
         <Route
             element={<AuthLayout />}
-            loader={userLoader}
             errorElement={<ErrorPage />}
         >
-            <Route path="/" element={<PublicLayout />}>
-                <Route path="/" element={<HomePage />} />
+            <Route path={APP_LINK.public.home} element={<PublicLayout />}>
+                <Route path={APP_LINK.public.home} element={<HomePage />} />
+                <Route path={APP_LINK.public.login} element={<SignInPage />} />
+                <Route path={APP_LINK.public.register} element={<SignUpPage />} />
             </Route>
 
-            <Route path="/app" element={<PrivateLayout />}>
-                <Route path="/app" element={<DashboardPage />} />
-                <Route path="/app/todos" element={<ExampleTodosPage />} />
+            <Route path={APP_LINK.private.home} element={<PrivateLayout />}>
+                <Route path={APP_LINK.private.home} element={<DashboardPage />} />
+                <Route path={APP_LINK.private.examples.todos} element={<ExampleTodosPage />} />
+                <Route path={APP_LINK.private.examples.todo()} element={<ExampleTodoPage />} />
             </Route>
         </Route>
     )

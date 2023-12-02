@@ -1,7 +1,28 @@
 {
-    "pages": {
+    "page": {
         "home": {
-            "welcome": "Welcome !"
+            "title": "Welcome !"
+        },
+        "signIn": {
+            "title": "Sign in to the app",
+            "noAccount": "Don't have an account ?",
+            "invalidCredentials": "Invalid credentials"
+        },
+        "app": {
+            "title": "Dashboard"
+        }
+    },
+
+    "button": {
+        "login": "Sign in",
+        "logout": "Sign out",
+        "register": "Sign up"
+    },
+
+    "form": {
+        "label": {
+            "email": "Email address",
+            "password": "Password"
         }
     }
 }

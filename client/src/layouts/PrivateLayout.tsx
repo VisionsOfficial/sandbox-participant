@@ -1,13 +1,11 @@
 import { APIClientProvider } from "react-api-client-provider";
 import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../contexts/AuthProvider";
-import { AppLinks } from "../config/links.config";
-import { SessionStorageKeys } from "../config/storage.config";
+import { useAuth } from "../auth/AuthProvider";
+import { SESSION_STORAGE_KEY } from "../constants/storeKeys";
+import { APP_LINK } from "../constants/appLinks";
 
 export const PrivateLayout = () => {
-    const { user } = useAuth();
-
-    console.log(user);
+    const { session } = useAuth();
 
     const ifPrevLocation = (sessionKey: string) => {
         const prevLoc = sessionStorage.getItem(sessionKey);
@@ -16,12 +14,12 @@ export const PrivateLayout = () => {
         return <Navigate to={prevLoc} />;
     };
 
-    if (!user) {
-        return <Navigate to={AppLinks.public.home} />;
+    if (!session) {
+        return <Navigate to={APP_LINK.public.home} />;
     }
 
-    ifPrevLocation(SessionStorageKeys.locationBeforeError);
-    ifPrevLocation(SessionStorageKeys.locationBeforeSessionExpiration);
+    ifPrevLocation(SESSION_STORAGE_KEY.locationBeforeError);
+    ifPrevLocation(SESSION_STORAGE_KEY.locationBeforeSessionExpiration);
 
     return (
         <APIClientProvider>

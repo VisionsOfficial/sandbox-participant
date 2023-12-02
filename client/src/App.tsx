@@ -20,7 +20,7 @@ export const App = () => {
             }}
             defaultHeaders={{ withCredentials: "true" }}
         >
-            <RouterProvider router={router} />;
+            <RouterProvider router={router} />
         </APIClientProvider>
     );
 };
