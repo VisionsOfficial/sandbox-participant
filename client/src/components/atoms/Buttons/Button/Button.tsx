@@ -1,6 +1,9 @@
 import { PropsWithChildren } from "react";
 import Styles from "./Button.module.scss";
-import { ButtonPropsType, StyleVariantsType } from "../../../../types/genericComponentProps";
+import {
+    ButtonPropsType,
+    StyleVariantsType,
+} from "../../../../types/genericComponentProps";
 
 type ButtonProps = ButtonPropsType & {
     loading?: boolean;

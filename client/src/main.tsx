@@ -15,9 +15,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
         <QueryClientProvider client={TanstackQueryClient}>
             <I18nextProvider i18n={i18n}>
-                <ThemeProvider
-                    themes={themes}
-                >
+                <ThemeProvider themes={themes}>
                     <App />
                     <ReactQueryDevtools />
                 </ThemeProvider>

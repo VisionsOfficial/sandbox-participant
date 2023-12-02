@@ -8,4 +8,9 @@ export type ButtonPropsType = React.DetailedHTMLProps<
     HTMLButtonElement
 >;
 
-export type StyleVariantsType = "normal" | "primary" | "secondary" | "muted" | "accent";
+export type StyleVariantsType =
+    | "normal"
+    | "primary"
+    | "secondary"
+    | "muted"
+    | "accent";

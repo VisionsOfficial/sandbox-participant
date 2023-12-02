@@ -17,20 +17,29 @@ import { SignUpPage } from "./pages/Auth/SignUp/SignUp.page";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
-        <Route
-            element={<AuthLayout />}
-            errorElement={<ErrorPage />}
-        >
+        <Route element={<AuthLayout />} errorElement={<ErrorPage />}>
             <Route path={APP_LINK.public.home} element={<PublicLayout />}>
                 <Route path={APP_LINK.public.home} element={<HomePage />} />
                 <Route path={APP_LINK.public.login} element={<SignInPage />} />
-                <Route path={APP_LINK.public.register} element={<SignUpPage />} />
+                <Route
+                    path={APP_LINK.public.register}
+                    element={<SignUpPage />}
+                />
             </Route>
 
             <Route path={APP_LINK.private.home} element={<PrivateLayout />}>
-                <Route path={APP_LINK.private.home} element={<DashboardPage />} />
-                <Route path={APP_LINK.private.examples.todos} element={<ExampleTodosPage />} />
-                <Route path={APP_LINK.private.examples.todo()} element={<ExampleTodoPage />} />
+                <Route
+                    path={APP_LINK.private.home}
+                    element={<DashboardPage />}
+                />
+                <Route
+                    path={APP_LINK.private.examples.todos}
+                    element={<ExampleTodosPage />}
+                />
+                <Route
+                    path={APP_LINK.private.examples.todo()}
+                    element={<ExampleTodoPage />}
+                />
             </Route>
         </Route>
     )
