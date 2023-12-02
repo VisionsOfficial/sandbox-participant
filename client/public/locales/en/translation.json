@@ -4,7 +4,7 @@
             "title": "Welcome !"
         },
         "signIn": {
-            "title": "Sign in to the app",
+            "title": "Sign in",
             "noAccount": "Don't have an account ?",
             "invalidCredentials": "Invalid credentials"
         },

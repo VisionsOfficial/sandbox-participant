@@ -67,3 +67,11 @@ The solution was to --transpile-only when running ts-node, so adding -T flag to 
 ## tsconfig.json and typeRoots
 
 Apparently, having a subdirecroty inside of the types directory makes typescript unable to find types that are set in that subdirectory, even if it is specified in the typeRoots attribute
+
+# Planned features left
+
+-   StyleProvider for client to share base styles instead of reimporting a scss module for each component. Good use case is for pages that can share the same default style.
+-   Image upload services management with Multer / File System storage / S3 / Google Cloud Storage to have the choice when using the template.
+-   Snackbars / Toasts Provider
+-   Optional auto-generated tests for new resources
+-   Optional auto-generated client crud page example for new resources including pagination etc

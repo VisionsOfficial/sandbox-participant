@@ -1,9 +1,53 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import { exec } from "child_process";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const translationFile = path.join(
+    __dirname,
+    "public",
+    "locales",
+    "en",
+    "translation.json"
+);
+
+// Custom plugin to observe the changes made in the main
+// translation.json file to update the translation variables
+// directly and make them accessible to development
+const generateTranslationKeysCommand = "pnpm generate:translation";
+export const watchTranslationFileChanges = () => {
+    // return; /** Uncomment this to deactivate */
+    fs.watchFile(translationFile, (curr, prev) => {
+        if (curr.mtime !== prev.mtime) {
+            exec(generateTranslationKeysCommand, (error) => {
+                if (error) {
+                    console.error(
+                        `Error executing pnpm generate:translation : ${error}`
+                    );
+                    return;
+                }
+            });
+        }
+    });
+};
+
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [react()],
+    plugins: [
+        react(),
+        {
+            name: "watch-translation-file",
+            configureServer() {
+                watchTranslationFileChanges();
+            },
+        },
+    ],
     build: {
         outDir: "../dist/public",
     },
