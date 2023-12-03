@@ -9,7 +9,7 @@ import { Button } from "../../../atoms/Buttons/Button/Button";
 import { useAuth } from "../../../../auth/AuthProvider";
 import { TRANSLATION_KEYS } from "../../../../constants/translationKeys";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faCross, faX } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faX } from "@fortawesome/free-solid-svg-icons";
 import { AxiosError } from "axios";
 import { Alert } from "../../../atoms/Alerts/Alert/Alert";
 
@@ -132,6 +132,7 @@ export const RegisterForm = (props: PropsWithChildren<RegisterFormProps>) => {
             <Button
                 type="submit"
                 variant="accent"
+                style={{ minWidth: 180 }}
                 onClick={(e) => {
                     e.preventDefault();
                     handleSubmit();

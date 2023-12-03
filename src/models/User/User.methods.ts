@@ -11,4 +11,10 @@ export const methods = (schema: Schema<IUser, IUserModel, IUserMethods>) => {
     schema.methods.validatePassword = function (password: string) {
         return bcrypt.compareSync(password, this.password);
     };
+
+    schema.methods.isEmailVerified = function () {
+        // If user has signed in with google, let's say that its validated
+        if (this.oauth?.google?.email) return true;
+        return this.verified_email;
+    };
 };

@@ -9,6 +9,7 @@ import {
 import { Button } from "../../../components/atoms/Buttons/Button/Button";
 import { useState } from "react";
 import useDebounce from "../../../hooks/useDebounce";
+import { Col } from "../../../components/molecules/Containers/Col/Col";
 
 export const ExampleTodosPage = () => {
     const queryClient = useQueryClient();
@@ -57,33 +58,33 @@ export const ExampleTodosPage = () => {
 
     return (
         <div className={Styles.ExampleUsersPage}>
-            <ul>
-                {query.data?.map((todo) => (
-                    <li key={todo._id}>
-                        <input
-                            type="text"
-                            value={editedTitle}
-                            onChange={(e) => setEditedTitle(e.target.value)}
-                            placeholder={todo.name}
-                        />
-                        <Button
-                            onClick={() => handleEditTodo(todo._id)}
-                            disabled={!debouncedTitle}
-                        >
-                            Edit
-                        </Button>
-                        <Button
-                            onClick={() => {
-                                mutationDelete.mutate(todo._id);
-                            }}
-                        >
-                            Delete
-                        </Button>
-                    </li>
-                ))}
-            </ul>
+            <Col>
+                <ul>
+                    {query.data?.map((todo) => (
+                        <li key={todo._id}>
+                            <input
+                                type="text"
+                                value={editedTitle}
+                                onChange={(e) => setEditedTitle(e.target.value)}
+                                placeholder={todo.name}
+                            />
+                            <Button
+                                onClick={() => handleEditTodo(todo._id)}
+                                disabled={!debouncedTitle}
+                            >
+                                Edit
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    mutationDelete.mutate(todo._id);
+                                }}
+                            >
+                                Delete
+                            </Button>
+                        </li>
+                    ))}
+                </ul>
 
-            <div>
                 <input
                     type="text"
                     value={newTodoTitle}
@@ -91,15 +92,15 @@ export const ExampleTodosPage = () => {
                         setNewTodoTitle(e.target.value);
                     }}
                 />
-            </div>
-            <Button
-                onClick={() => {
-                    // Type infered from the mutationFn params
-                    mutationCreate.mutate({ name: newTodoTitle });
-                }}
-            >
-                Add Todo
-            </Button>
+                <Button
+                    onClick={() => {
+                        // Type infered from the mutationFn params
+                        mutationCreate.mutate({ name: newTodoTitle });
+                    }}
+                >
+                    Add Todo
+                </Button>
+            </Col>
         </div>
     );
 };

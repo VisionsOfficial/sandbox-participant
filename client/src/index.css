@@ -46,6 +46,7 @@
     /* Spacing */
     --space-xs: 4px;
     --space-sm: 8px;
+    --space-smd: 12px;
     --space-md: 16px;
     --space-lg: 24px;
     --space-xl: 32px;
@@ -89,6 +90,17 @@ button {
     background-color: var(--color-background);
     color: var(--text-primary);
     padding: var(--space-sm) var(--space-md);
+    vertical-align: middle;
+    white-space: nowrap;
+    width: auto;
+    min-width: min-content;
+    padding: 0 var(--space-smd);
+    position: relative;
+    text-align: center;
+    letter-spacing: 0.25px;
+    height: 40px;
+    font-size: var(--font-size-sm);
+    background-image: none;
 }
 
 button:hover {

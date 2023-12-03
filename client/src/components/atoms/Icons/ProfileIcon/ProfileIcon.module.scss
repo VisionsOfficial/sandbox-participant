@@ -1,6 +1,6 @@
 $size: 30px;
 
-.ProfileIcon {
+.ProfileIconLetter {
     padding: var(--space-sm);
     margin-left: var(--space-md);
     background-color: var(--color-accent);
@@ -14,5 +14,18 @@ $size: 30px;
 
     &:hover {
         filter: brightness(90%);
+    }
+}
+
+.ProfileIcon {
+    border-radius: 100px;
+    margin: 0px var(--space-md);
+    height: $size;
+    width: $size;
+    object-fit: contain;
+    cursor: pointer;
+
+    img {
+        border-radius: 100px;
     }
 }
