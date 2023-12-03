@@ -2,6 +2,8 @@ import { Router } from "express";
 import { body } from "express-validator";
 import { validate } from "../../middlewares/validator.middleware";
 import {
+    getGoogleAuthURL,
+    handleGoogleAuthCallback,
     login,
     register,
 } from "../../../controllers/public/v1/auth.public.controller";
@@ -30,5 +32,8 @@ r.post(
     validate,
     register
 );
+
+r.get("/oauth/google", getGoogleAuthURL);
+r.get("/oauth/google/callback", handleGoogleAuthCallback);
 
 export default r;

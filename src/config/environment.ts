@@ -10,6 +10,12 @@ export const config: {
     port: number;
 
     /**
+     * URL the frontend is running on if different
+     * Most useful for when in development
+     */
+    clientAppURL: string;
+
+    /**
      * Secret key for signing the authorization token generation
      */
     jwtSecretKey: string;
@@ -116,9 +122,17 @@ export const config: {
             pass: string;
         };
     };
+    oauth: {
+        google: {
+            clientID: string;
+            clientSecret: string;
+            redirectURI: string;
+        };
+    };
 } = {
     env: "development",
     port: 3000,
+    clientAppURL: "http://localhost:5173",
     jwtSecretKey: "your-secret-key",
     jwtBearerTokenExpiration: "1h",
     jwtRefreshTokenExpiration: "7d",
@@ -147,6 +161,13 @@ export const config: {
             pass: "",
         },
     },
+    oauth: {
+        google: {
+            clientID: "",
+            clientSecret: "",
+            redirectURI: "http://localhost:3000/v1/auth/oauth/google/callback",
+        },
+    },
 };
 
 export const setupEnvironment = (customEnv?: string) => {
@@ -173,6 +194,7 @@ export const setupEnvironment = (customEnv?: string) => {
 
     config.env = process.env.NODE_ENV || config.env;
     config.port = parseInt(process.env.PORT) || config.port;
+    config.clientAppURL = process.env.CLIENT_APP_URL || config.clientAppURL;
     config.jwtSecretKey = process.env.JWT_SECRET_KEY || config.jwtSecretKey;
     config.jwtBearerTokenExpiration =
         process.env.JWT_BEARER_TOKEN_EXPIRATION ||
@@ -235,5 +257,19 @@ export const setupEnvironment = (customEnv?: string) => {
             process.env.NODEMAILER_SERVICE || config.emails.nodemailer.service,
         user: process.env.NODEMAILER_USER,
         pass: process.env.NODEMAILER_PASS,
+    };
+
+    // ---------------------
+    // ------ OAUTH -------
+    // ---------------------
+    config.oauth.google = {
+        clientID:
+            process.env.GOOGLE_OAUTH_CLIENT_ID || config.oauth.google.clientID,
+        clientSecret:
+            process.env.GOOGLE_OAUTH_CLIENT_SECRET ||
+            config.oauth.google.clientSecret,
+        redirectURI:
+            process.env.GOOGLE_OAUTH_REDIRECT_URI ||
+            config.oauth.google.redirectURI,
     };
 };

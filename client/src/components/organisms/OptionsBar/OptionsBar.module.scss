@@ -1,4 +1,9 @@
 .OptionsBar {
-    height: 25px;
+    height: 45px;
     padding: var(--space-sm);
+    gap: var(--space-sm);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
 }

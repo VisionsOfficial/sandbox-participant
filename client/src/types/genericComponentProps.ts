@@ -8,6 +8,11 @@ export type ButtonPropsType = React.DetailedHTMLProps<
     HTMLButtonElement
 >;
 
+export type DivPropsType = React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLDivElement>,
+    HTMLDivElement
+>;
+
 export type StyleVariantsType =
     | "normal"
     | "primary"

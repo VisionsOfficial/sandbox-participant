@@ -7,9 +7,18 @@ type ProfileIconProps = {};
 export const ProfileIcon = ({}: PropsWithChildren<ProfileIconProps>) => {
     const { session } = useAuth();
     if (!session) return null;
+
+    const className = session.user.oauth.google.picture
+        ? Styles.ProfileIcon
+        : Styles.ProfileIconLetter;
+
     return (
-        <div className={Styles.ProfileIcon}>
-            {session.user.email.charAt(0).toUpperCase()}
+        <div className={className}>
+            {session.user.oauth.google.picture ? (
+                <img src={session.user.oauth.google.picture} />
+            ) : (
+                session.user.email.charAt(0).toUpperCase()
+            )}
         </div>
     );
 };
