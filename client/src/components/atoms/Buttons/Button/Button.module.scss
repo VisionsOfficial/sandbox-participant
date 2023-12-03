@@ -37,3 +37,13 @@
         color: var(--text-on-primary);
     }
 }
+
+.disabled {
+    cursor: default;
+    filter: brightness(85%);
+    pointer-events: none;
+
+    &:hover {
+        filter: brightness(85%);
+    }
+}

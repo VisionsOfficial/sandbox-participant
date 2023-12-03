@@ -25,13 +25,14 @@ export const watchTranslationFileChanges = () => {
     // return; /** Uncomment this to deactivate */
     fs.watchFile(translationFile, (curr, prev) => {
         if (curr.mtime !== prev.mtime) {
-            exec(generateTranslationKeysCommand, (error) => {
+            exec(generateTranslationKeysCommand, (error, stdout) => {
                 if (error) {
                     console.error(
                         `Error executing pnpm generate:translation : ${error}`
                     );
                     return;
                 }
+                console.log(stdout);
             });
         }
     });

@@ -75,3 +75,4 @@ Apparently, having a subdirecroty inside of the types directory makes typescript
 -   Snackbars / Toasts Provider
 -   Optional auto-generated tests for new resources
 -   Optional auto-generated client crud page example for new resources including pagination etc
+-   Sign In with google / github / facebook

@@ -1,4 +1,4 @@
-import { PropsWithChildren, useReducer } from "react";
+import { PropsWithChildren, useReducer, useState } from "react";
 import Styles from "./RegisterForm.module.scss";
 import { Form } from "../../../atoms/Forms/Form/Form";
 import { FormPropsType } from "../../../../types/genericComponentProps";
@@ -8,6 +8,10 @@ import { Credentials } from "../../../../auth/auth.api";
 import { Button } from "../../../atoms/Buttons/Button/Button";
 import { useAuth } from "../../../../auth/AuthProvider";
 import { TRANSLATION_KEYS } from "../../../../constants/translationKeys";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faCross, faX } from "@fortawesome/free-solid-svg-icons";
+import { AxiosError } from "axios";
+import { Alert } from "../../../atoms/Alerts/Alert/Alert";
 
 type RegisterFormProps = FormPropsType & {
     defaultEmail?: string;
@@ -42,7 +46,23 @@ export const RegisterForm = (props: PropsWithChildren<RegisterFormProps>) => {
         email: defaultEmail ?? initialState.email,
     });
 
-    const { register } = useAuth();
+    const [passwordConfirmation, setPasswordConfirmation] = useState("");
+
+    const { register, mutationRegister } = useAuth();
+
+    const passwordMatch = !!(
+        formData.password &&
+        passwordConfirmation &&
+        passwordConfirmation === formData.password
+    );
+
+    const handleSubmit = () => {
+        if (!passwordMatch) return;
+
+        register(formData);
+    };
+
+    console.log(mutationRegister);
 
     return (
         <Form className={Styles.RegisterForm} {...rest}>
@@ -74,14 +94,51 @@ export const RegisterForm = (props: PropsWithChildren<RegisterFormProps>) => {
                     })
                 }
             />
+            <FormInput
+                type="password"
+                id="passwordConfirmation"
+                name="passwordConfirmation"
+                label={t(TRANSLATION_KEYS.formLabelPasswordconfirmation)}
+                value={passwordConfirmation}
+                required
+                onChange={(e) => setPasswordConfirmation(e.target.value)}
+            />
+            {formData.password && passwordConfirmation && (
+                <div>
+                    <FontAwesomeIcon icon={passwordMatch ? faCheck : faX} />
+                    <small>
+                        {passwordMatch
+                            ? t(TRANSLATION_KEYS.pageSignupPasswordmatch)
+                            : t(TRANSLATION_KEYS.pageSignupPasswordnomatch)}
+                    </small>
+                </div>
+            )}
+            {mutationRegister.error &&
+                mutationRegister.error instanceof AxiosError && (
+                    <>
+                        {mutationRegister.error?.response?.status === 400 && (
+                            <Alert type={"error"}>
+                                {t(TRANSLATION_KEYS.pageSignupInvalidpassword)}
+                            </Alert>
+                        )}
+                        {mutationRegister.error?.response?.status === 409 && (
+                            <Alert type={"error"}>
+                                {t(TRANSLATION_KEYS.pageSignupExistingemail)}
+                            </Alert>
+                        )}
+                    </>
+                )}
+            <br />
             <Button
                 type="submit"
+                variant="accent"
                 onClick={(e) => {
                     e.preventDefault();
-                    register(formData);
+                    handleSubmit();
                 }}
+                disabled={!passwordMatch && !!formData.email}
             >
-                {t("button.login")}
+                {t(TRANSLATION_KEYS.buttonRegister)}
             </Button>
             {children}
         </Form>

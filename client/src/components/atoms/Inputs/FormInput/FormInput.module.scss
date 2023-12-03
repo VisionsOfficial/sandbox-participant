@@ -1,2 +1,8 @@
 .FormInput {
+    text-align: left;
+    padding: 5px;
+
+    .Required {
+        color: var(--color-error);
+    }
 }
