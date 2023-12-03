@@ -17,7 +17,10 @@ import { SignUpPage } from "./pages/Auth/SignUp/SignUp.page";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
-        <Route element={<AuthLayout />} errorElement={<ErrorPage />}>
+        <Route
+            element={<AuthLayout />}
+            errorElement={<AuthLayout errorElement={<ErrorPage />} />}
+        >
             <Route path={APP_LINK.public.home} element={<PublicLayout />}>
                 <Route path={APP_LINK.public.home} element={<HomePage />} />
                 <Route path={APP_LINK.public.login} element={<SignInPage />} />

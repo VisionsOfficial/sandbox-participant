@@ -5,7 +5,11 @@ import { BreakpointProvider } from "../contexts/BreakpointProvider";
 import { NavBar } from "../components/organisms/NavBar/NavBar";
 import { OptionsBar } from "../components/organisms/OptionsBar/OptionsBar";
 
-export const AuthLayout = () => {
+type AuthLayoutProps = {
+    errorElement?: JSX.Element;
+};
+
+export const AuthLayout = ({ errorElement }: AuthLayoutProps) => {
     const outlet = useOutlet();
 
     return (
@@ -14,7 +18,7 @@ export const AuthLayout = () => {
                 <main>
                     <NavBar />
                     <OptionsBar />
-                    {outlet}
+                    {!!errorElement ? errorElement : outlet}
                     <FooterNav />
                 </main>
             </BreakpointProvider>
