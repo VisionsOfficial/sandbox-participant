@@ -154,7 +154,6 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     });
 
     useEffect(() => {
-        console.log({ dataChanged: session });
         if (!session) {
             onLogout();
         } else {
@@ -165,6 +164,11 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
             // localStorage.setItem(LOCAL_STORAGE_KEY.userToken, session.token);
         }
     }, [session]);
+
+    useEffect(() => {
+        // Find session on reload / future visit
+        mutationRefresh();
+    }, []);
 
     return (
         <AuthContext.Provider

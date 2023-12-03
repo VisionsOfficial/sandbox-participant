@@ -6,6 +6,7 @@ export const APP_LINK = {
     },
     private: {
         home: "/app",
+        profile: "/app/profile",
         examples: {
             todos: "/app/todos",
             todo: (todoId?: string) => `/app/todo/${todoId ?? ":todoId"}`,

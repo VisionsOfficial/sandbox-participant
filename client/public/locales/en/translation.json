@@ -4,9 +4,17 @@
             "title": "Welcome !"
         },
         "signIn": {
-            "title": "Sign in to the app",
+            "title": "Sign in",
             "noAccount": "Don't have an account ?",
             "invalidCredentials": "Invalid credentials"
+        },
+        "signUp": {
+            "title": "Sign up",
+            "hasAccount": "Already have an account ?",
+            "invalidPassword": "Password is not strong enough",
+            "passwordMatch": "Passwords match",
+            "passwordNoMatch": "Password do not match",
+            "existingEmail": "Email already exists"
         },
         "app": {
             "title": "Dashboard"
@@ -22,7 +30,8 @@
     "form": {
         "label": {
             "email": "Email address",
-            "password": "Password"
+            "password": "Password",
+            "passwordConfirmation": "Password confirmation"
         }
     }
 }

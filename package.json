@@ -1,6 +1,6 @@
 {
     "name": "fullstack-setup-2023",
-    "version": "1.4.0",
+    "version": "1.5.4",
     "description": "A personal fullstack app dev environment setup",
     "main": "src/index.ts",
     "scripts": {

@@ -22,16 +22,24 @@ type ButtonProps = ButtonPropsType & {
 };
 
 export const Button = (props: PropsWithChildren<ButtonProps>) => {
-    const { loading, children, circle, variant = "normal", ...rest } = props;
+    const {
+        loading,
+        children,
+        circle,
+        variant = "normal",
+        disabled,
+        ...rest
+    } = props;
 
     const classNames = `${Styles.Button} ${rest.className} ${Styles[variant]} ${
         circle ? Styles.circle : ""
-    }`.trim();
+    } ${disabled ? Styles.disabled : ""}`.trim();
     const style = circle ? { width: circle, height: circle } : {};
     return (
         <button
             className={classNames}
             {...rest}
+            disabled={disabled}
             style={{ ...rest.style, ...style }}
         >
             {children}

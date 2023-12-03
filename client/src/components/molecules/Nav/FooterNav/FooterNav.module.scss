@@ -6,6 +6,6 @@
     @include mixins.center-both;
     position: fixed;
     bottom: 0;
-
+    border-top: 1px solid var(--color-accent);
     justify-content: space-evenly;
 }

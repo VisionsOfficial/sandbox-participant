@@ -1,12 +1,28 @@
 import Styles from "./SignUpPage.module.scss";
 
 import { RegisterForm } from "../../../components/molecules/Forms/RegisterForm/RegisterForm";
+import { TRANSLATION_KEYS } from "../../../constants/translationKeys";
+import { useTranslation } from "react-i18next";
+import { Button } from "../../../components/atoms/Buttons/Button/Button";
+import { Link } from "react-router-dom";
+import { APP_LINK } from "../../../constants/appLinks";
 
 export const SignUpPage = () => {
+    const { t } = useTranslation();
+
     return (
         <div className={Styles.SignUpPage}>
-            <h2>Signup</h2>
-            <RegisterForm />
+            <h1>{t(TRANSLATION_KEYS.pageSignupTitle)}</h1>
+            <div className={Styles.form}>
+                <RegisterForm />
+                <br />
+                <p>{t(TRANSLATION_KEYS.pageSignupHasaccount)}</p>
+                <Button variant="primary">
+                    <Link to={APP_LINK.public.login}>
+                        {t(TRANSLATION_KEYS.buttonLogin)}
+                    </Link>
+                </Button>
+            </div>
         </div>
     );
 };

@@ -20,7 +20,7 @@ export const FormInput = (props: PropsWithChildren<FormInputProps>) => {
                 {label}
                 {required && <span className={Styles.Required}>*</span>}
             </Label>
-            <Input {...rest} className={required ? Styles.Required : ""} />
+            <Input {...rest} />
             {errorMessage && (
                 <p className={Styles.ErrorMessage}>{errorMessage}</p>
             )}
