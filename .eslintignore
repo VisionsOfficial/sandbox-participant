@@ -8,6 +8,7 @@ bin
 git-hooks
 pnpm-lock.yaml
 scripts/*
-.fttemplates/*
+.fttemplates
+.fttemplates/*/**
 client/*
 */**/logs/*

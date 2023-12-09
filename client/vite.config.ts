@@ -6,6 +6,9 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { exec } from "child_process";
 
+import { config } from "dotenv";
+config();
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -56,7 +59,7 @@ export default defineConfig({
         port: parseInt(process.env.PORT) || 5173,
         proxy: {
             "/v1": {
-                target: process.env.API_ENDPOINT,
+                target: process.env.VITE_API_URL,
                 changeOrigin: true,
                 // rewrite: (path) => path.replace(/^\/api/, ""),
                 ws: true,

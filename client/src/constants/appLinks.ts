@@ -10,6 +10,7 @@ export const APP_LINK = {
         examples: {
             todos: "/app/todos",
             todo: (todoId?: string) => `/app/todo/${todoId ?? ":todoId"}`,
+            socketio: "/app/socketio",
         },
     },
 };

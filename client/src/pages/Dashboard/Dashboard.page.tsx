@@ -10,6 +10,13 @@ export const DashboardPage = () => {
             <Button>
                 <Link to={APP_LINK.private.examples.todos}>Examples Todos</Link>
             </Button>
+            <br />
+            <br />
+            <Button>
+                <Link to={APP_LINK.private.examples.socketio}>
+                    Example SocketIO
+                </Link>
+            </Button>
         </div>
     );
 };

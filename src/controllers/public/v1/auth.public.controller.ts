@@ -173,12 +173,7 @@ export const handleGoogleAuthCallback = async (
                 initializeSession(req, user.id).sessionToken;
             }
 
-            const redirectURL = "/app/oauth/signin";
-            res.redirect(
-                config.env === "development"
-                    ? `${config.clientAppURL}${redirectURL}`
-                    : redirectURL
-            );
+            res.redirect(`${config.clientAppURL}/`);
         } catch (err) {
             Logger.error({
                 location: "handleGoogleAuthCallback",

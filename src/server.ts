@@ -5,7 +5,9 @@ import { IncomingMessage, Server, ServerResponse } from "http";
 import { config } from "./config/environment";
 import { setupSession } from "./config/session";
 import { setupRoutes } from "./routes";
-import { morganLogs } from "./libs/loggers";
+import { instrument } from "@socket.io/admin-ui";
+import { Logger, morganLogs } from "./libs/loggers";
+import { Server as SocketioServer } from "socket.io";
 
 export type AppServer = {
     app: express.Application;
@@ -49,6 +51,20 @@ export const startServer = async (port?: number) => {
     const server = app.listen(PORT, () => {
         // eslint-disable-next-line no-console
         console.log("Server running on: http://localhost:" + PORT);
+    });
+
+    const io = new SocketioServer(server, {
+        cors: {
+            origin: [config.clientAppURL, "https://admin.socket.io"],
+        },
+    });
+
+    instrument(io, { auth: false, mode: "development" });
+
+    io.on("connect", (socket) => {
+        socket.on("send-message", (data) => {
+            io.emit("receive-message", data);
+        });
     });
 
     return { app, server } as AppServer;
