@@ -5,6 +5,7 @@ bin
 dist
 */**/logs/*
 .fttemplates
+.fttemplates/*/**
 
 pnpm-lock.yaml
 package-lock.json

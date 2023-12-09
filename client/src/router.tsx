@@ -14,6 +14,7 @@ import { APP_LINK } from "./constants/appLinks";
 import { ExampleTodoPage } from "./pages/Examples/ExampleTodo/ExampleTodo.page";
 import { SignInPage } from "./pages/Auth/SignIn/SignIn.page";
 import { SignUpPage } from "./pages/Auth/SignUp/SignUp.page";
+import { ExampleSocketIOPage } from "./pages/Examples/ExampleSocketIO/ExampleSocketIO.page";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -43,7 +44,13 @@ export const router = createBrowserRouter(
                     path={APP_LINK.private.examples.todo()}
                     element={<ExampleTodoPage />}
                 />
+                <Route
+                    path={APP_LINK.private.examples.socketio}
+                    element={<ExampleSocketIOPage />}
+                />
             </Route>
+
+            <Route path="*" element={<>Not found</>} />
         </Route>
     )
 );

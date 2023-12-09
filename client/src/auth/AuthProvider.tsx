@@ -1,4 +1,10 @@
-import { createContext, PropsWithChildren, useContext, useEffect } from "react";
+import {
+    createContext,
+    PropsWithChildren,
+    useContext,
+    useEffect,
+    useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import {
     DefinedUseQueryResult,
@@ -51,6 +57,12 @@ type ContextValue = {
     session: AuthUserResponse | null;
 
     /**
+     * When refreshing or accessing a page manually, allows to track if the
+     * initial session refresh has been settled or not
+     */
+    initializing: boolean;
+
+    /**
      * The shortcut for mutationLogin.mutate if no checks are needed on
      * the mutation
      */
@@ -98,6 +110,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
     const { data: session } = query;
 
+    const [initializing, setInitializing] = useState(true);
+
     const onLogout = () => {
         queryClient.setQueryData(["user"], null);
         [LOCAL_STORAGE_KEY.user, LOCAL_STORAGE_KEY.userToken].forEach((key) => {
@@ -117,6 +131,10 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
     const { mutate: mutationRefresh } = useMutation({
         mutationFn: getSession,
+        onSettled: () => {
+            console.log("mutation settled");
+            setInitializing(false);
+        },
         onSuccess: (data) => {
             if (!data) {
                 queryClient.setQueryData(["user"], null);
@@ -154,6 +172,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     });
 
     useEffect(() => {
+        if (initializing) return;
         if (!session) {
             onLogout();
         } else {
@@ -163,7 +182,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
             );
             // localStorage.setItem(LOCAL_STORAGE_KEY.userToken, session.token);
         }
-    }, [session]);
+    }, [session, initializing]);
 
     useEffect(() => {
         // Find session on reload / future visit
@@ -181,6 +200,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
                 login: mutationLogin.mutate,
                 register: mutationRegister.mutate,
                 refreshSession: mutationRefresh,
+                initializing,
             }}
         >
             {children}
