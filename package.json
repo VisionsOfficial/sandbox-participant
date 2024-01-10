@@ -1,12 +1,12 @@
 {
     "name": "fullstack-setup-2023",
-    "version": "1.7.0",
+    "version": "1.7.1",
     "description": "A personal fullstack app dev environment setup",
     "main": "src/index.ts",
     "scripts": {
-        "dev": "pnpm nodemon --development",
-        "start": "node dist/index.js --production",
-        "staging": "node dist/index.js --staging",
+        "dev": "pnpm nodemon -L",
+        "start": "node dist/index.js",
+        "staging": "node dist/index.js",
         "dev:env": "pnpx nodemon",
         "build": "rimraf ./build && tsc",
         "test": "ts-mocha -p tsconfig.json tests/**/*.spec.ts --timeout 4000",

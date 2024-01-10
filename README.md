@@ -30,7 +30,15 @@ If pnpm is not installed, you can install it using npm
 npm i -g pnpm
 ```
 
-# Scripts and helpers
+# Docker
+
+```bash
+cd /sandbox/consumer && docker compose up -d
+```
+
+```bash
+cd /sandbox/provider && docker compose up -d
+```
 
 ## Boilerplate generation
 

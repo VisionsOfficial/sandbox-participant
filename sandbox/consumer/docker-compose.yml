@@ -1,0 +1,35 @@
+version: "3"
+services:
+    consumer:
+        container_name: consumer
+        build:
+            context: ../../
+            dockerfile: docker/app/Dockerfile
+            args:
+                ENV: ${NODE_ENV}
+                WHO: ${WHO}
+        restart: unless-stopped
+        tty: true
+        volumes:
+            - "../../src/:/usr/src/app/src"
+        ports:
+            - "3020:3000"
+        env_file:
+            - .env
+        networks:
+            - consumer
+
+    mongodb:
+        container_name: "consumer-mongodb"
+        build:
+            context: ../../
+            dockerfile: docker/mongodb/Dockerfile
+        #    Uncomment to connect mongodb container to mongo compass or another service
+        ports:
+            - "27019:27017"
+        networks:
+            - consumer
+
+networks:
+    consumer:
+        external: false
