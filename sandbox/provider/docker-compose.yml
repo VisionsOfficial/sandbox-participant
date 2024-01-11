@@ -1,7 +1,7 @@
-version: "3"
+version: "3.5"
 services:
-    provider:
-        container_name: provider
+    provider-api:
+        container_name: provider-api
         build:
             context: ../../
             dockerfile: docker/app/Dockerfile
@@ -17,10 +17,10 @@ services:
         env_file:
             - .env
         networks:
-            - provider
+            - provider-api
 
     mongodb:
-        container_name: "provider-mongodb"
+        container_name: "provider-api-mongodb"
         build:
             context: ../../
             dockerfile: docker/mongodb/Dockerfile
@@ -28,8 +28,9 @@ services:
         ports:
             - "27018:27017"
         networks:
-            - provider
+            - provider-api
 
 networks:
-    provider:
+    provider-api:
         external: false
+        name: provider-api

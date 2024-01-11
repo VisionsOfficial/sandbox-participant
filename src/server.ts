@@ -4,7 +4,7 @@ import cookieParser from "cookie-parser";
 import { IncomingMessage, Server, ServerResponse } from "http";
 import { config } from "./config/environment";
 import { setupSession } from "./config/session";
-import { setupRoutes } from "./routes";
+import routes from "./libs/loaders/routes";
 import { instrument } from "@socket.io/admin-ui";
 import { Logger, morganLogs } from "./libs/loggers";
 import { Server as SocketioServer } from "socket.io";
@@ -44,7 +44,7 @@ export const startServer = async (port?: number) => {
     app.use(setupSession());
     app.use(morganLogs);
 
-    await setupRoutes(app);
+    routes(app);
 
     const PORT = port ? port : config.port;
 

@@ -13,11 +13,11 @@ const runSeed = async () => {
         });
 
         await Promise.all(users.map((u) => u.save()));
-        Logger.debug("Seed data inserted successfully");
+        // console.log("Seed data inserted successfully");
     } catch (err) {
-        Logger.debug(`Seed data insertion failed: ${err.message}`);
+        // console.log(`Seed data insertion failed: ${err.message}`);
     } finally {
-        mongoose.disconnect();
+        await mongoose.disconnect();
     }
 };
 

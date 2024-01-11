@@ -1,7 +1,7 @@
-version: "3"
+version: "3.5"
 services:
-    consumer:
-        container_name: consumer
+    consumer-api:
+        container_name: consumer-api
         build:
             context: ../../
             dockerfile: docker/app/Dockerfile
@@ -17,10 +17,10 @@ services:
         env_file:
             - .env
         networks:
-            - consumer
+            - consumer-api
 
     mongodb:
-        container_name: "consumer-mongodb"
+        container_name: "consumer-api-mongodb"
         build:
             context: ../../
             dockerfile: docker/mongodb/Dockerfile
@@ -28,8 +28,9 @@ services:
         ports:
             - "27019:27017"
         networks:
-            - consumer
+            - consumer-api
 
 networks:
-    consumer:
+    consumer-api:
         external: false
+        name: consumer-api

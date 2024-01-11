@@ -11,7 +11,7 @@ import { body, param } from "express-validator";
 
 const r: Router = Router();
 
-r.use(authenticate);
+// r.use(authenticate);
 
 r.get("/me", getCurrentUser);
 r.put(

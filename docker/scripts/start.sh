@@ -5,7 +5,7 @@ if [ "$TEST" = 'provider' ]; then
 fi
 
 if [ "$ENV" = 'development' ]; then
-  npm run dev
+  npm run build && npm run start
 else
   npm run build && npm run start
 fi
