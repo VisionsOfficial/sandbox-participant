@@ -17,7 +17,7 @@ type GoogleOAuthProviderSchema = {
 
 export interface IUser extends AllSchemas {
     email: string;
-    password: string;
+    password?: string;
     verified_email: boolean;
 
     /**

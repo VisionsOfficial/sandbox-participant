@@ -36,6 +36,28 @@ export const getAllUsers = async (
 };
 
 /**
+ * Gets all users
+ */
+export const createUsers = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const users = [];
+
+        for (const user of req.body) {
+            const u = await User.create(user);
+            users.push(u);
+        }
+
+        return res.json(users);
+    } catch (err) {
+        next(err);
+    }
+};
+
+/**
  * Gets a user by ID
  */
 export const getUserById = async (

@@ -41,6 +41,9 @@ export const startServer = async (port?: number) => {
         });
     }
 
+    //Prettify json response
+    app.set("json spaces", 2);
+
     app.use(setupSession());
     app.use(morganLogs);
 
