@@ -16,10 +16,14 @@ services:
             - "3020:3000"
         env_file:
             - .env
+        links:
+            - mongodb3
+        environment:
+            MONGO_URI: ${MONGO_URI}
         networks:
             - consumer-api
 
-    mongodb:
+    mongodb3:
         container_name: "consumer-api-mongodb"
         build:
             context: ../../
