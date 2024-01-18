@@ -3,6 +3,9 @@
     "version": "1.7.5",
     "description": "A personal fullstack app dev environment setup",
     "main": "src/index.ts",
+    "engines": {
+        "node": "18.x"
+    },
     "scripts": {
         "dev": "pnpm nodemon -L",
         "start": "node dist/src/index.js",
@@ -13,7 +16,7 @@
         "prettier": "prettier --write ./src/",
         "lint": "eslint src/**/*.{ts,js}",
         "lint:fix": "eslint src/**/*.{ts,js} --fix",
-        "postinstall": "git config core.hooksPath ./.git-hooks && npm i -g semver",
+        "postinstall": "git init && git config core.hooksPath ./.git-hooks && npm i -g semver",
         "seed": "ts-node src/seeds/index.ts",
         "setup:model": "node scripts/setupModel.mjs",
         "create:resource": "node scripts/createResource.mjs"
