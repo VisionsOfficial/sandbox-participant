@@ -14,20 +14,20 @@ export const getAllUsers = async (
     next: NextFunction
 ) => {
     try {
-        if (AppCache.has("users")) {
-            Logger.debug(
-                `users cache will expire at: ${formatTimestamp(
-                    AppCache.getTtl("users")
-                )}`
-            );
-            return res.json(AppCache.get("users"));
-        }
+        // if (AppCache.has("users")) {
+        //     Logger.debug(
+        //         `users cache will expire at: ${formatTimestamp(
+        //             AppCache.getTtl("users")
+        //         )}`
+        //     );
+        //     return res.json(AppCache.get("users"));
+        // }
 
         const users = await User.find()
             .select(mongooseModelQueries.User.publicSelect)
             .lean();
 
-        AppCache.set("users", users);
+        // AppCache.set("users", users);
 
         return res.json(users);
     } catch (err) {
@@ -46,8 +46,13 @@ export const createUsers = async (
     try {
         const users = [];
 
-        for (const user of req.body) {
-            const u = await User.create(user);
+        if (req.body.length > 0) {
+            for (const user of req.body) {
+                const u = await User.create(user);
+                users.push(u);
+            }
+        } else {
+            const u = await User.create(req.body);
             users.push(u);
         }
 
