@@ -7,7 +7,7 @@
         "node": "18.x"
     },
     "scripts": {
-        "dev": "pnpm nodemon -L",
+        "dev": "pnpm nodemon -L --development",
         "start": "node dist/src/index.js",
         "staging": "node dist/index.js",
         "dev:env": "pnpx nodemon",
