@@ -1,10 +1,8 @@
 import mongoose from "mongoose";
 import { config } from "./environment";
 
-export async function loadMongoose(mongoURI?: string) {
-    const connect = await mongoose.connect(
-        mongoURI ? mongoURI : config.mongoURI
-    );
+export async function loadMongoose() {
+    const connect = await mongoose.connect(config.mongoURI);
     const connection = connect.connection;
     connection.on(
         "error",

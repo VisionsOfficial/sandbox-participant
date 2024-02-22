@@ -136,7 +136,7 @@ export const config: {
     jwtSecretKey: "your-secret-key",
     jwtBearerTokenExpiration: "1h",
     jwtRefreshTokenExpiration: "7d",
-    mongoURI: "",
+    mongoURI: "mongodb://localhost:27017/provider-api",
     sessionSecret: "secret123",
     sessionCookieDuration: 24000,
     sessionCookieName: "mySessionCookie",

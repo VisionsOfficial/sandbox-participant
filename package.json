@@ -1,6 +1,6 @@
 {
     "name": "fullstack-setup-2023",
-    "version": "1.7.7",
+    "version": "1.7.8",
     "description": "A personal fullstack app dev environment setup",
     "main": "src/index.ts",
     "engines": {
@@ -8,6 +8,8 @@
     },
     "scripts": {
         "dev": "pnpm nodemon -L --development",
+        "provider": "ts-node src/seeds/index.ts && pnpm nodemon -L --provider",
+        "consumer": "pnpm nodemon -L --consumer",
         "start": "node dist/src/index.js",
         "staging": "node dist/index.js",
         "dev:env": "pnpx nodemon",

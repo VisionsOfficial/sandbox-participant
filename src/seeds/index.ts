@@ -6,7 +6,7 @@ import { Logger } from "../libs/loggers";
 
 const runSeed = async () => {
     try {
-        await loadMongoose(process.env.MONGO_URI);
+        await loadMongoose();
         const users = userSeed.map((u) => {
             const nu = new User(u);
             return nu;
