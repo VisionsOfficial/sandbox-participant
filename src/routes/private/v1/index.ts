@@ -2,7 +2,7 @@ import usersPrivateRouter from "./users.private.router";
 
 const routers = [
     {
-        prefix: "users",
+        prefix: "/users",
         router: usersPrivateRouter,
     },
 ];
