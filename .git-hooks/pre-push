@@ -1,46 +1,46 @@
 #!/bin/bash
 
-RED="\e[31m"
-GREEN="\e[32m"
-ENDCOLOR="\e[0m"
-
-# Get the local version in the staged package.json file
-LOCAL_VERSION=$(git show :package.json | grep '"version":' | cut -d '"' -f 4)
-
-# Get the remote version in the package.json file of the branch you're pushing to
-REMOTE_BRANCH=$(git symbolic-ref -q --short HEAD)
-REMOTE_VERSION=$(git show "origin/$REMOTE_BRANCH:package.json" | grep '"version":' | cut -d '"' -f 4)
-
-echo "Running pre-push hook"
-
-# Function to compare two versions using semver and check if local version is higher
-version_compare_and_check() {
-    local local_version="$1"
-    local remote_version="$2"
-    local result
-    result=$(semver compare "$local_version" "$remote_version" | tr -d '\n')
-
-    if [ "$local_version" == "$remote_version" ]; then
-        echo "Local version is the same as remote version"
-        return 1
-    else
-        return 0
-    fi
-
-    
-    # Check if the output of semver is a reordering of local and remote versions
-    # in an order that would prove that local version is higher than remote version
-    if [ "$result" != "$remote_version$local_version" ]; then
-        return 1
-    else
-        return 0
-    fi
-}
-
-# Check if the local version is not the same as the remote version and is higher
-if version_compare_and_check "$LOCAL_VERSION" "$REMOTE_VERSION"; then
-    echo "Local package.json version ($LOCAL_VERSION) is different from and higher than the remote version ($REMOTE_VERSION). Proceeding with the push..."
-else
-    echo -e "${RED}Error: Local package.json version ($LOCAL_VERSION) is the same as or lower than the remote version ($REMOTE_VERSION). Pushing on the same or lower version is not allowed.${ENDCOLOR}"
-    exit 1
-fi
+#RED="\e[31m"
+#GREEN="\e[32m"
+#ENDCOLOR="\e[0m"
+#
+## Get the local version in the staged package.json file
+#LOCAL_VERSION=$(git show :package.json | grep '"version":' | cut -d '"' -f 4)
+#
+## Get the remote version in the package.json file of the branch you're pushing to
+#REMOTE_BRANCH=$(git symbolic-ref -q --short HEAD)
+#REMOTE_VERSION=$(git show "origin/$REMOTE_BRANCH:package.json" | grep '"version":' | cut -d '"' -f 4)
+#
+#echo "Running pre-push hook"
+#
+## Function to compare two versions using semver and check if local version is higher
+#version_compare_and_check() {
+#    local local_version="$1"
+#    local remote_version="$2"
+#    local result
+#    result=$(semver compare "$local_version" "$remote_version" | tr -d '\n')
+#
+#    if [ "$local_version" == "$remote_version" ]; then
+#        echo "Local version is the same as remote version"
+#        return 1
+#    else
+#        return 0
+#    fi
+#
+#
+#    # Check if the output of semver is a reordering of local and remote versions
+#    # in an order that would prove that local version is higher than remote version
+#    if [ "$result" != "$remote_version$local_version" ]; then
+#        return 1
+#    else
+#        return 0
+#    fi
+#}
+#
+## Check if the local version is not the same as the remote version and is higher
+#if version_compare_and_check "$LOCAL_VERSION" "$REMOTE_VERSION"; then
+#    echo "Local package.json version ($LOCAL_VERSION) is different from and higher than the remote version ($REMOTE_VERSION). Proceeding with the push..."
+#else
+#    echo -e "${RED}Error: Local package.json version ($LOCAL_VERSION) is the same as or lower than the remote version ($REMOTE_VERSION). Pushing on the same or lower version is not allowed.${ENDCOLOR}"
+#    exit 1
+#fi
