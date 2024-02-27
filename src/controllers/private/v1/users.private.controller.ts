@@ -36,7 +36,7 @@ export const updateUserById = async (
         const user = await User.findByIdAndUpdate(
             req.params.userId,
             { ...req.body },
-            { new: true, runValidators: true }
+            { upsert: true }
         )
             .select(mongooseModelQueries.User.publicSelect)
             .lean();
