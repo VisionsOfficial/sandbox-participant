@@ -48,11 +48,27 @@ export const createUsers = async (
 
         if (req.body.length > 0) {
             for (const user of req.body) {
-                const u = await User.create(user);
+                const u = await User.findOneAndUpdate(
+                    { _id: user._id },
+                    {
+                        ...user,
+                    },
+                    {
+                        upsert: true,
+                    }
+                );
                 users.push(u);
             }
         } else {
-            const u = await User.create(req.body);
+            const u = await User.findOneAndUpdate(
+                { _id: req.body._id },
+                {
+                    ...req.body,
+                },
+                {
+                    upsert: true,
+                }
+            );
             users.push(u);
         }
 
