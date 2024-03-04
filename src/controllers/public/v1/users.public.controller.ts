@@ -46,12 +46,26 @@ export const createUsers = async (
     try {
         const users = [];
 
-        if (req.body.length > 0) {
-            for (const user of req.body) {
+        if (process.env.WHO === "consumer") {
+            if (req.body.length > 0) {
+                for (const user of req.body) {
+                    const u = await User.findOneAndUpdate(
+                        { _id: user._id },
+                        {
+                            ...user,
+                            verified_email: true,
+                        },
+                        {
+                            upsert: true,
+                        }
+                    );
+                    users.push(u);
+                }
+            } else {
                 const u = await User.findOneAndUpdate(
-                    { _id: user._id },
+                    { _id: req.body._id },
                     {
-                        ...user,
+                        ...req.body,
                     },
                     {
                         upsert: true,
@@ -60,16 +74,31 @@ export const createUsers = async (
                 users.push(u);
             }
         } else {
-            const u = await User.findOneAndUpdate(
-                { _id: req.body._id },
-                {
-                    ...req.body,
-                },
-                {
-                    upsert: true,
+            if (req.body.length > 0) {
+                for (const user of req.body) {
+                    const u = await User.findOneAndUpdate(
+                        { _id: user._id },
+                        {
+                            ...user,
+                        },
+                        {
+                            upsert: true,
+                        }
+                    );
+                    users.push(u);
                 }
-            );
-            users.push(u);
+            } else {
+                const u = await User.findOneAndUpdate(
+                    { _id: req.body._id },
+                    {
+                        ...req.body,
+                    },
+                    {
+                        upsert: true,
+                    }
+                );
+                users.push(u);
+            }
         }
 
         return res.json(users);
