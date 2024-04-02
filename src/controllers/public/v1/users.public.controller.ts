@@ -57,6 +57,7 @@ export const createUsers = async (
                         },
                         {
                             upsert: true,
+                            new: true,
                         }
                     );
                     users.push(u);
@@ -69,6 +70,7 @@ export const createUsers = async (
                     },
                     {
                         upsert: true,
+                        new: true,
                     }
                 );
                 users.push(u);
@@ -83,6 +85,7 @@ export const createUsers = async (
                         },
                         {
                             upsert: true,
+                            new: true,
                         }
                     );
                     users.push(u);
@@ -95,6 +98,7 @@ export const createUsers = async (
                     },
                     {
                         upsert: true,
+                        new: true,
                     }
                 );
                 users.push(u);
@@ -117,6 +121,22 @@ export const getUserById = async (
 ) => {
     try {
         return res.json(req.queriedUser.toObject());
+    } catch (err) {
+        next(err);
+    }
+};
+
+/**
+ * Gets a user by ID
+ */
+export const createUser = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const newUser = await User.create({ ...req.body });
+        return res.status(200).json(newUser);
     } catch (err) {
         next(err);
     }
