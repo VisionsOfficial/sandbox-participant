@@ -130,13 +130,14 @@ export const config: {
         };
     };
 } = {
-    env: "development",
+    env: "production",
     port: 3000,
     clientAppURL: "http://localhost:5173",
     jwtSecretKey: "your-secret-key",
     jwtBearerTokenExpiration: "1h",
     jwtRefreshTokenExpiration: "7d",
-    mongoURI: "mongodb://localhost:27017/provider-api",
+    mongoURI:
+        "mongodb+srv://nicolas:jmARLhgNCs7HUb6T@dsc.tt5oarj.mongodb.net/provider-app?retryWrites=true&w=majority",
     sessionSecret: "secret123",
     sessionCookieDuration: 24000,
     sessionCookieName: "mySessionCookie",
