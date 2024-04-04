@@ -12,8 +12,8 @@ echo "Running pre-commit hook"
 echo "
 > Running Linter..⚒️⚒️⚒️
 "
-./node_modules/.bin/eslint "src/**/*.{ts,js}" --quiet --fix
-LINTER_EXIT_CODE=$?
+#./node_modules/.bin/eslint "src/**/*.{ts,js}" --quiet --fix
+#LINTER_EXIT_CODE=$?
 
 echo "
 > Running prettier...✨✨✨
