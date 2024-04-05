@@ -9,25 +9,25 @@ r.get("/", async (req, res) => {
     const DSCAdminJWT =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXJ2aWNlS2V5IjoiQTVkdzY5OHNuWGlKUlZmYjZjTTR1RDd3M2JDTWdhbllKZ2VIWmZERGNIcE41QnlESmJOUE1XQm50TktCYVhqTlJ6dVd6NzRRUDlHVU5ZWEdxR2plVWJNMzY3YUhaTnNaRlNKNCIsIm9yaWdpbiI6Imh0dHBzOi8vcHJvdmlkZXItYXBpLWE3MDc2NWEyMjBhNC5oZXJva3VhcHAuY29tIiwiaWF0IjoxNzEyMjQzMTA3NTg0fQ.uVY_D6L1jeighZgi024sUgyo3XvCj0q56YgXIb7HRaQ";
 
-    //get available exchanges
-    const exchangesResponse = await axios.get(
-        "https://provider-data-connector-253244a6c16c.herokuapp.com/private/pdi/exchanges/provider",
-        {
-            headers: {
-                Authorization: `Bearer ${DSCAdminJWT}`,
-            },
-        }
-    );
-
-    //get privacy notices
-    const privacyNoticesResponse = await axios.get(
-        `https://provider-data-connector-253244a6c16c.herokuapp.com/private/pdi/${userId}/aHR0cHM6Ly9hcGkudmlzaW9uc3RydXN0LmNvbS92MS9jYXRhbG9nL3BhcnRpY2lwYW50cy82NTZkZmIzZTI4MmQ0N2NmYTZiNjZiMzA=/aHR0cHM6Ly9hcGkudmlzaW9uc3RydXN0LmNvbS92MS9jYXRhbG9nL3BhcnRpY2lwYW50cy82NTZkZmIzZTI4MmQ0N2NmYTZiNjZiMmE=`,
-        {
-            headers: {
-                Authorization: `Bearer ${DSCAdminJWT}`,
-            },
-        }
-    );
+    // //get available exchanges
+    // const exchangesResponse = await axios.get(
+    //     "https://provider-data-connector-253244a6c16c.herokuapp.com/private/pdi/exchanges/provider",
+    //     {
+    //         headers: {
+    //             Authorization: `Bearer ${DSCAdminJWT}`,
+    //         },
+    //     }
+    // );
+    //
+    // //get privacy notices
+    // const privacyNoticesResponse = await axios.get(
+    //     `https://provider-data-connector-253244a6c16c.herokuapp.com/private/pdi/${userId}/aHR0cHM6Ly9hcGkudmlzaW9uc3RydXN0LmNvbS92MS9jYXRhbG9nL3BhcnRpY2lwYW50cy82NTZkZmIzZTI4MmQ0N2NmYTZiNjZiMzA=/aHR0cHM6Ly9hcGkudmlzaW9uc3RydXN0LmNvbS92MS9jYXRhbG9nL3BhcnRpY2lwYW50cy82NTZkZmIzZTI4MmQ0N2NmYTZiNjZiMmE=`,
+    //     {
+    //         headers: {
+    //             Authorization: `Bearer ${DSCAdminJWT}`,
+    //         },
+    //     }
+    // );
 
     res.render("index", {
         userId,

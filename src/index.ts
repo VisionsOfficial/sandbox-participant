@@ -8,7 +8,7 @@ export const main = async (options?: {
     port?: number;
 }) => {
     const { customEnv, mongoURI, port } = options;
-    // setupEnvironment(customEnv);
+    setupEnvironment(customEnv);
     await loadMongoose();
     const { server, app } = await startServer(port);
     return { server, app };
