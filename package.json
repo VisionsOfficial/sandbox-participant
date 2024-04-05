@@ -13,7 +13,7 @@
         "start": "node dist/src/index.js",
         "staging": "node dist/index.js",
         "dev:env": "pnpx nodemon",
-        "build": "rimraf ./dist && tsc && mkdirp dist/src/vue && cp src/vue/index.ejs ./dist/src/vue/index.ejs",
+        "build": "rimraf ./dist && tsc && mkdirp dist/src/vue && cp src/vue/index.ejs ./dist/src/vue/index.ejs && cp src/vue/error.ejs ./dist/src/vue/error.ejs",
         "test": "ts-mocha -p tsconfig.json tests/**/*.spec.ts --timeout 4000",
         "prettier": "prettier --write ./src/",
         "lint": "eslint src/**/*.{ts,js}",
