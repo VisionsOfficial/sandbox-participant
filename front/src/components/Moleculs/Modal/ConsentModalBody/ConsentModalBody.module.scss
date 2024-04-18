@@ -1,0 +1,325 @@
+.ConsentModalBody {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: auto;
+    max-width: 600px;
+    padding: var(--vt-spacing-sm);
+    padding-bottom: var(--vt-spacing-lg);
+    margin-top: var(--vt-spacing-md);
+
+    .exchangesContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        width: 100%;
+        gap: 12px;
+
+        .containerItems {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: flex-start;
+            gap: 8px;
+
+            .exchangeItem {
+                cursor: pointer;
+                border-radius: 5px;
+                text-align: start;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                padding: 8px;
+                gap: 12px;
+
+                &:hover {
+                    background-color: var(--vt-color-primary-opacity);
+                }
+            }
+        }
+    }
+
+    .privacyNoticeContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        width: 100%;
+        gap: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .participantContainer {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 20px;
+        width: 100%;
+
+        .participant {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            width: inherit;
+
+            &Logo {
+                border: 2px solid var(--vt-color-primary);
+                background: #ffffff;
+                width: clamp(80px, 100%, 80px);
+                height: clamp(80px, 100%, 80px);
+                aspect-ratio: 1/1;
+                border-radius: 15px;
+                object-fit: contain;
+            }
+
+            .controllerIdentify {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                justify-content: flex-start;
+                gap: 12px;
+                text-align: start;
+            }
+        }
+
+        .exchangeSVG {
+            transform: translateY(30px);
+            min-width: 30px;
+        }
+    }
+
+    .sharingContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        text-align: start;
+        gap: 16px;
+        width: 100%;
+
+        h4 {
+            text-align: center;
+            width: 100%;
+            font-size: 20px;
+        }
+
+        .dataContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 16px;
+            background: var(--vt-bg-opacity);
+            padding: 10px;
+            border-radius: 15px;
+
+            .obligation {
+                text-align: center;
+                font-weight: bold;
+            }
+
+            .information {
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                font-size: 14px;
+                width: 100%;
+                padding-bottom: 0.5rem;
+                padding-top: 0.5rem;
+
+                h5 {
+                    font-size: 18px;
+                }
+            }
+
+            .selected {
+                cursor: pointer;
+                background: var(--vt-bg-opacity);
+                display: flex;
+                flex-direction: column;
+                font-size: 14px;
+                width: 100%;
+                padding-bottom: 0.5rem;
+                padding-top: 0.5rem;
+
+                h5 {
+                    font-size: 18px;
+                }
+            }
+
+            .dataResources {
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+                justify-content: space-between;
+                gap: 16px;
+
+                .resourceItem {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+                    font-size: 14px;
+
+                    &Name {
+                        font-size: 16px;
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+    }
+
+    .emailContainer {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 8px;
+
+        .emailInputContainer {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 8px;
+
+            .emailCustom {
+                padding: 8px 12px;
+                border-radius: 5px;
+                border: 1px solid #17243f;
+            }
+        }
+    }
+
+    .learnMoreContainer {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        text-align: start;
+        gap: 12px;
+        h4 {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        h5 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .organisation {
+            .participantLogo {
+                border: 2px solid var(--vt-color-primary);
+                background: #ffffff;
+                width: clamp(80px, 100%, 80px) !important;
+                height: clamp(80px, 100%, 80px) !important;
+                aspect-ratio: 1/1;
+                border-radius: 15px;
+                object-fit: contain;
+            }
+
+            .card {
+                background-color: var(--vt-bg-opacity);
+            }
+
+            .cardHeader {
+                align-items: center !important;
+                justify-content: center !important;
+                gap: 8px;
+            }
+
+            .activeHeader {
+                color: var(--vt-color-primary);
+            }
+        }
+
+        .sharing {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 8px;
+        }
+
+        .pdiContainer {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            align-items: flex-start;
+            text-align: start;
+            gap: 4px;
+
+            h5 {
+                font-size: 18px;
+                color: var(--vt-color-primary);
+            }
+        }
+    }
+
+    .legalContainer {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: flex-start;
+        text-align: start;
+        gap: 12px;
+
+        .mainTitle {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .informationTitle {
+            font-size: 18px;
+        }
+
+        .informationLink {
+            color: var(--vt-color-primary);
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.active {
+    background-color: var(--vt-color-primary);
+    color: white;
+
+    &:hover {
+        background-color: var(--vt-color-primary) !important;
+        color: white;
+    }
+}
+
+.activeHeader {
+    color: var(--vt-color-primary);
+}
+
+.item {
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: start;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 8px;
+    gap: 12px;
+
+    > div {
+        &:last-child {
+            text-align: end;
+        }
+    }
+
+    &:hover {
+        background-color: var(--vt-color-primary-opacity);
+    }
+}

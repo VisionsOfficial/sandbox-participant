@@ -1,0 +1,55 @@
+.Alert {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+
+    svg {
+        min-width: clamp(20px, 20px, 20px);
+    }
+
+    p {
+        font-size: 0.95rem;
+        text-align: start;
+        margin: 0;
+    }
+}
+
+.error {
+    color: red;
+    svg {
+        stroke: red;
+    }
+}
+
+.errorBg {
+    width: auto;
+    background-color: lighten($color: red, $amount: 45%);
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.warning {
+    color: #ed6c02;
+    svg {
+        stroke: #ed6c02;
+    }
+}
+
+.warningBg {
+    width: 100%;
+    background-color: lighten($color: #ed6c02, $amount: 45%);
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.vtBg {
+    background-color: #dbffaa;
+    color: #17243f;
+    padding: 5px 10px;
+    border-radius: 3px;
+
+    svg {
+        stroke: #17243f;
+    }
+}

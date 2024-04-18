@@ -8,6 +8,6 @@ const routers = [
 ];
 
 export default {
-    prefix: "/private",
+    prefix: "/api/private",
     routers,
 };

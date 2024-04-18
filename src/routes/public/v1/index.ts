@@ -6,13 +6,13 @@ const routers = [
         prefix: "/users",
         router: usersPublicRouter,
     },
-    {
-        prefix: "/",
-        router: frontPublicRouter,
-    },
+    // {
+    //     prefix: "/",
+    //     router: frontPublicRouter,
+    // },
 ];
 
 export default {
-    prefix: "",
+    prefix: "/api",
     routers,
 };

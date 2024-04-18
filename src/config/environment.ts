@@ -131,7 +131,7 @@ export const config: {
     };
 } = {
     env: "production",
-    port: 3000,
+    port: 3001,
     clientAppURL: "http://localhost:5173",
     jwtSecretKey: "your-secret-key",
     jwtBearerTokenExpiration: "1h",

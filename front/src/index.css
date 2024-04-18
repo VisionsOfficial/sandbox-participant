@@ -1,0 +1,127 @@
+@font-face {
+    font-family: "KoHo";
+    src: url("../src/assets/font/KoHo-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: "KoHo";
+    src: url("../src/assets/font/KoHo-BoldItalic.ttf") format("truetype");
+    font-weight: bold;
+    font-style: italic;
+}
+@font-face {
+    font-family: "KoHo";
+    src: url("../src/assets/font/KoHo-ExtraLight.ttf") format("truetype");
+    font-weight: 200;
+    font-style: normal;
+}
+@font-face {
+    font-family: "KoHo";
+    src: url("../src/assets/font/KoHo-ExtraLightItalic.ttf") format("truetype");
+    font-weight: 200;
+    font-style: italic;
+}
+@font-face {
+    font-family: "KoHo";
+    src: url("../src/assets/font/KoHo-Italic.ttf") format("truetype");
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: "KoHo";
+    src: url("../src/assets/font/KoHo-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: "KoHo";
+    src: url("../src/assets/font/KoHo-LightItalic.ttf") format("truetype");
+    font-weight: 300;
+    font-style: italic;
+}
+@font-face {
+    font-family: "KoHo";
+    src: url("../src/assets/font/KoHo-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: "KoHo";
+    src: url("../src/assets/font/KoHo-MediumItalic.ttf") format("truetype");
+    font-weight: 500;
+    font-style: italic;
+}
+@font-face {
+    font-family: "KoHo";
+    src: url("../src/assets/font/KoHo-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "KoHo";
+    src: url("../src/assets/font/KoHo-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: "KoHo";
+    src: url("../src/assets/font/KoHo-SemiBoldItalic.ttf") format("truetype");
+    font-weight: 600;
+    font-style: italic;
+}
+
+:root {
+    font-family: KoHo, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    --vt-color-primary: #00a2ae;
+    --vt-color-primary-opacity: #00a2ae20;
+    --vt-color-secondary: #17243f;
+    --vt-color-tertiary: #08ffad;
+    --vt-color-quaternary: #dbffaa;
+    --vt-color-text: #00000;
+    --vt-color-disabled: #d9d9d9;
+    --vt-color-border-disabled: #d9d9d9;
+    --vt-gradient: linear-gradient(to right, #dbffaa, #00a2ae, #08ffad);
+
+    --vt-bg-opacity: #08ffad1f;
+
+    --bg-color-disabled: rgba(0, 0, 0, 0.04);
+
+    --box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
+
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.5rem;
+    --font-size-heading-1: 1.875rem;
+    --font-size-heading-2: 1.5rem;
+    --font-size-heading-3: 1.125rem;
+    --font-size-heading-4: 1rem;
+    --font-size-heading-5: 0.875rem;
+
+    --default-global-radius: 6px;
+    --vt-radius-md: 8px;
+    --vt-circle-radius: 50%;
+    --vt-round-radius: 40px;
+
+    --vt-spacing-xs: 4px;
+    --vt-spacing-sm: 8px;
+    --vt-spacing-md: 16px;
+    --vt-spacing-lg: 24px;
+    --vt-spacing-xl: 32px;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    place-items: center;
+    min-width: 320px;
+    min-height: 100vh;
+}

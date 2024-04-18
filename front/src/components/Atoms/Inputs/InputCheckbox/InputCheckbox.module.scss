@@ -1,0 +1,100 @@
+.checkboxWrapper {
+    .inputCheckbox {
+        display: none;
+        visibility: hidden;
+
+        &:checked + .labelCheckbox .customCheckbox {
+            background: var(--vt-color-primary);
+            border-color: var(--vt-color-primary);
+
+            svg {
+                stroke-dashoffset: 0;
+            }
+        }
+    }
+
+    .labelCheckbox {
+        display: inline-flex;
+        justify-content: flex-start;
+        align-items: center;
+        vertical-align: bottom;
+        margin: auto;
+        user-select: none;
+        -webkit-user-select: none;
+        cursor: pointer;
+
+        span {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            vertical-align: middle;
+            transform: translate3d(0, 0, 0);
+        }
+
+        .customCheckbox {
+            position: relative;
+            border-radius: 3px;
+            transform: scale(1);
+            vertical-align: middle;
+            border: 1px solid var(--vt-color-disabled);
+            transition: all 0.2s ease;
+
+            svg {
+                fill: none;
+                stroke: white;
+                stroke-width: 2;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke-dasharray: 16px;
+                stroke-dashoffset: 16px;
+                transition: all 0.3s ease;
+                transition-delay: 0.1s;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        &:hover {
+            .customCheckbox {
+                border-color: var(--vt-color-primary);
+            }
+        }
+    }
+}
+.smallInputCheckbox {
+    .labelCheckbox {
+        .customCheckbox {
+            width: 14px;
+            height: 14px;
+        }
+
+        .checkboxChildren {
+            font-size: var(--font-size-sm);
+            padding-left: var(--vt-spacing-xs);
+        }
+    }
+}
+.middleInputCheckbox {
+    .labelCheckbox {
+        .customCheckbox {
+            width: 16px;
+            height: 16px;
+        }
+
+        .checkboxChildren {
+            font-size: var(--font-size-md);
+            padding-left: var(--vt-spacing-sm);
+        }
+    }
+}
+.largeInputCheckbox {
+    .labelCheckbox {
+        .customCheckbox {
+            width: 18px;
+            height: 18px;
+        }
+        .checkboxChildren {
+            font-size: var(--font-size-lg);
+            padding-left: var(--vt-spacing-sm);
+        }
+    }
+}

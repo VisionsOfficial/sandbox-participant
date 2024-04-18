@@ -1,0 +1,18 @@
+.Input {
+    border: 1px solid #fbfbfbfb;
+    background-color: #fbfbfbfb;
+    border-radius: 5px;
+    padding: 0.25rem 0.3rem;
+    box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+    width: auto;
+
+    &:focus {
+        accent-color: #fbfbfbfb;
+        border-color: #171717;
+    }
+
+    &:hover {
+        border-color: #171717;
+    }
+}

@@ -1,0 +1,26 @@
+.ConsentModalExtra {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+
+    button {
+        width: calc(100% / 3);
+        border: none;
+        border-top: 1px solid var(--vt-color-secondary);
+        background: #ffffff;
+        border-left: 1px solid var(--vt-color-secondary);
+        cursor: pointer;
+        padding: 0px;
+        height: 40px;
+        font-weight: 500;
+
+        &:first-child {
+            border-left: 0;
+        }
+    }
+
+    .active {
+        background-color: var(--vt-color-primary);
+    }
+}
