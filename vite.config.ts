@@ -1,17 +1,23 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [react()],
     root: "front",
     server: {
-        port: 3000,
+        port: 3331,
         proxy: {
-            "/api": "http://localhost:3001", // Assuming your backend runs on port 3000
+            "/api": "http://localhost:3000", // Assuming your backend runs on port 3000
         },
     },
     build: {
         outDir: "./dist",
+    },
+    resolve: {
+        alias: {
+            "@": path.resolve(__dirname, "./front"),
+        },
     },
 });

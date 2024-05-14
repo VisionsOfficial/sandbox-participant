@@ -1,52 +1,73 @@
-import { useState } from "react";
 import "./App.css";
-import { ConsentModal } from "../src/components/ConsentModal/ConsentModal.tsx";
-import { RegistrationForm } from "../src/components/Organismes/Forms/RegistrationForm/RegistrationForm.tsx";
-import { FormType } from "../src/types";
-import { Button } from "../src/components/Atoms/Button/Button.tsx";
+import axios from "axios";
+import { useState } from "react";
 
 function App() {
-    const [visible, setVisible] = useState(false);
-    const [userIdentifier, setUserIdentifier] = useState<string>(
-        "65646d4320ec42ff2e719706"
-    );
-    const [currentForm, setCurrentForm] = useState<FormType>("login");
+    const [url, setUrl] = useState(null);
+    const [privacyNoticeId, setPrivacyNoticeId] = useState(null);
+    const [userId, setUserId] = useState(null);
 
-    const handleFormChange = (type: FormType) => {
-        setCurrentForm(type);
+    const getIframe = async (privacyNoticeId?: string) => {
+        console.log(privacyNoticeId);
+        console.log(userId);
+        if (!userId) {
+            window.alert("need an user id to display the iframe");
+        }
+        const login = await axios.post(
+            "https://provider-data-connector-253244a6c16c.herokuapp.com/login",
+            {
+                serviceKey:
+                    "A5dw698snXiJRVfb6cM4uD7w3bCMganYJgeHZfDDcHpN5ByDJbNPMWBntNKBaXjNRzuWz74QP9GUNYXGqGjeUbM367aHZNsZFSJ4",
+                secretKey: "BG9QZQHj7o2UtXC",
+            }
+        );
+
+        const iframe = await axios.get(
+            `https://provider-data-connector-253244a6c16c.herokuapp.com/private/pdi?userId=${userId}${
+                privacyNoticeId ? `&privacyNoticeId=${privacyNoticeId}` : ""
+            }`,
+            {
+                headers: {
+                    Authorization: `Bearer ${login.data.content.token}`,
+                },
+            }
+        );
+
+        if (iframe.data.content.url) {
+            setUrl(iframe.data.content.url);
+        }
     };
 
-    const handleCancel = () => {
-        setVisible(false);
+    const closeIframe = () => {
+        setUrl(null);
     };
 
     return (
         <>
             <div>
-                {userIdentifier && (
-                    <Button onClick={() => setVisible(true)}>Open modal</Button>
-                )}
-                <ConsentModal
-                    visible={visible}
-                    onCancel={handleCancel}
-                    PDCAdminJWT="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXJ2aWNlS2V5IjoiQTVkdzY5OHNuWGlKUlZmYjZjTTR1RDd3M2JDTWdhbllKZ2VIWmZERGNIcE41QnlESmJOUE1XQm50TktCYVhqTlJ6dVd6NzRRUDlHVU5ZWEdxR2plVWJNMzY3YUhaTnNaRlNKNCIsImlhdCI6MTcxMzI1NTIwNzA0NSwiZXhwIjoxNzEzMjU1MjA3MzQ1fQ.ZhnBBzCQU9HF8dTY12eNp4AcYHFCpoK298oNJJqRVXo"
-                    sessionCheckEndpoint="https://provider-data-connector-253244a6c16c.herokuapp.com/private/consent?triggerDataExchange=true"
-                    userIdentifier={userIdentifier}
-                    enableToggle={true}
-                    // privacyNoticeEndpoint="https://provider-data-connector-253244a6c16c.herokuapp.com/private/consent/65646d4320ec42ff2e719706/privacy-notice/65e9f407de244c2a18764332"
+                <label htmlFor="privacyNoticeId">privacyNoticeId</label>
+                <input
+                    name="privacyNoticeId"
+                    type="text"
+                    onChange={(e) => setPrivacyNoticeId(e.target.value)}
                 />
-
-                {!userIdentifier && (
-                    <RegistrationForm
-                        formType={currentForm}
-                        onFormChange={handleFormChange}
-                    />
-                )}
-                <RegistrationForm
-                    formType={currentForm}
-                    onFormChange={handleFormChange}
+                <br></br>
+                <label htmlFor="userId">userId</label>
+                <input
+                    name="userId"
+                    type="text"
+                    onChange={(e) => setUserId(e.target.value)}
                 />
             </div>
+            <div>
+                <button onClick={() => getIframe(privacyNoticeId)}>
+                    privacy Notice
+                </button>
+                <button onClick={() => getIframe()}>no Privacy Notice</button>
+                <button onClick={() => closeIframe()}>close Iframe</button>
+            </div>
+
+            {url && <iframe height="600" width="600" src={url}></iframe>}
         </>
     );
 }
