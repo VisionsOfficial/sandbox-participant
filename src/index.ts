@@ -14,4 +14,4 @@ export const main = async (options?: {
     return { server, app };
 };
 
-main({ mongoURI: process.env.MONGO_URI, port: 3000 });
+main({ mongoURI: process.env.MONGO_URI, port: 3001 });
