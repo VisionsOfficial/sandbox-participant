@@ -49,7 +49,7 @@ export const startServer = async (port?: number) => {
 
     routes(app);
 
-    const PORT = port ? port : config.port;
+    const PORT = port || config.port;
 
     const server = app.listen(PORT, () => {
         // eslint-disable-next-line no-console

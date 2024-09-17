@@ -13,6 +13,6 @@ const routers = [
 ];
 
 export default {
-    prefix: "",
+    prefix: "/api",
     routers,
 };
