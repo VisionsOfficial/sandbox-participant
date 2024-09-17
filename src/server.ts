@@ -8,6 +8,7 @@ import routes from "./libs/loaders/routes";
 import { instrument } from "@socket.io/admin-ui";
 import { Logger, morganLogs } from "./libs/loggers";
 import { Server as SocketioServer } from "socket.io";
+import path from "path";
 
 export type AppServer = {
     app: express.Application;
@@ -24,12 +25,11 @@ export const startServer = async (port?: number) => {
 
     app.use(cors({ origin: true, credentials: true }));
     app.use(cookieParser());
-    app.use(express.json());
-    app.use(express.urlencoded({ extended: true }));
+    app.use(express.json({ limit: "1gb" }));
+    app.use(express.urlencoded({ limit: "1gb", extended: true }));
 
-    app.get("/", async (req: Request, res: Response) => {
-        return res.status(200).send("Welcome to the API");
-    });
+    app.set("views", [path.join(__dirname, "vue")]);
+    app.set("view engine", "ejs");
 
     app.get("/health", (req: Request, res: Response) => {
         return res.status(200).send("OK");

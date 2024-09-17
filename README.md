@@ -50,7 +50,7 @@ Making use of the vs code folder templates extension to easily create folder str
 
 | command                              | what it does                                                                                                                                                                                                 |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `pnpm setup:model --model=modelName` | To run after creating a model with folder templates to configure the models/index.ts and move the types to the types folder automatically                                                                    |
+| `pnpm setup:model --model=modelName` | To run after creating a model with folder templates to configure the models/Stripe.service.ts and move the types to the types folder automatically                                                           |
 | `pnpm create:router`                 | Will start a CLI tool that will guide in the creation of files and boilerplate for a new resource. Can create routes and controllers automatically and set them up to be directly served by the application. |
 
 # Git Hooks

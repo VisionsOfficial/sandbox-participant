@@ -3,6 +3,7 @@ import { body, param } from "express-validator";
 import { validate } from "../../middlewares/validator.middleware";
 import { queryUserById } from "../../middlewares/queries/userQueries.middleware";
 import {
+    createUser,
     createUsers,
     getAllUsers,
     getUserById,
@@ -42,5 +43,7 @@ r.delete(
     queryUserById,
     deleteUserById
 );
+
+r.post("/register", createUser);
 
 export default r;
