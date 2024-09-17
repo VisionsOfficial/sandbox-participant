@@ -7,11 +7,11 @@ export const main = async (options?: {
     mongoURI?: string;
     port?: number;
 }) => {
-    const { customEnv, mongoURI, port } = options;
+    const { customEnv, port } = options;
     setupEnvironment(customEnv);
     await loadMongoose();
     const { server, app } = await startServer(port);
     return { server, app };
 };
 
-main({ mongoURI: process.env.MONGO_URI, port: parseInt(process.env.PORT) });
+main({ mongoURI: process.env.MONGO_URI });

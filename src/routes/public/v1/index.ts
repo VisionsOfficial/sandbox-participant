@@ -1,5 +1,5 @@
 import usersPublicRouter from "./users.public.router";
-import frontPublicRouter from "./front.public.router";
+import consumerPublicRouter from "./consumer.public.router";
 
 const routers = [
     {
@@ -8,7 +8,7 @@ const routers = [
     },
     {
         prefix: "/",
-        router: frontPublicRouter,
+        router: consumerPublicRouter,
     },
 ];
 
