@@ -25,8 +25,8 @@ export const startServer = async (port?: number) => {
 
     app.use(cors({ origin: true, credentials: true }));
     app.use(cookieParser());
-    app.use(express.json());
-    app.use(express.urlencoded({ extended: true }));
+    app.use(express.json({ limit: "1gb" }));
+    app.use(express.urlencoded({ limit: "1gb", extended: true }));
 
     app.set("views", [path.join(__dirname, "vue")]);
     app.set("view engine", "ejs");
