@@ -1,0 +1,9 @@
+.Col {
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--space-sm);
+}

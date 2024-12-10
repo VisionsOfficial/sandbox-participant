@@ -1,0 +1,31 @@
+$size: 30px;
+
+.ProfileIconLetter {
+    padding: var(--space-sm);
+    margin-left: var(--space-md);
+    background-color: var(--color-accent);
+    height: $size;
+    width: $size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(90%);
+    }
+}
+
+.ProfileIcon {
+    border-radius: 100px;
+    margin: 0px var(--space-md);
+    height: $size;
+    width: $size;
+    object-fit: contain;
+    cursor: pointer;
+
+    img {
+        border-radius: 100px;
+    }
+}

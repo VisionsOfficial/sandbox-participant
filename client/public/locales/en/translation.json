@@ -1,0 +1,37 @@
+{
+    "page": {
+        "home": {
+            "title": "Welcome !"
+        },
+        "signIn": {
+            "title": "Sign in",
+            "noAccount": "Don't have an account ?",
+            "invalidCredentials": "Invalid credentials"
+        },
+        "signUp": {
+            "title": "Sign up",
+            "hasAccount": "Already have an account ?",
+            "invalidPassword": "Password is not strong enough",
+            "passwordMatch": "Passwords match",
+            "passwordNoMatch": "Password do not match",
+            "existingEmail": "Email already exists"
+        },
+        "app": {
+            "title": "Dashboard"
+        }
+    },
+
+    "button": {
+        "login": "Sign in",
+        "logout": "Sign out",
+        "register": "Sign up"
+    },
+
+    "form": {
+        "label": {
+            "email": "Email address",
+            "password": "Password",
+            "passwordConfirmation": "Password confirmation"
+        }
+    }
+}

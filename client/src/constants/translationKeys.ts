@@ -1,0 +1,20 @@
+/// FILE GENERATED AUTOMATICALLY USING pnpm generate:translation
+export const TRANSLATION_KEYS = {
+    pageHomeTitle: "page.home.title",
+    pageSigninTitle: "page.signIn.title",
+    pageSigninNoaccount: "page.signIn.noAccount",
+    pageSigninInvalidcredentials: "page.signIn.invalidCredentials",
+    pageSignupTitle: "page.signUp.title",
+    pageSignupHasaccount: "page.signUp.hasAccount",
+    pageSignupInvalidpassword: "page.signUp.invalidPassword",
+    pageSignupPasswordmatch: "page.signUp.passwordMatch",
+    pageSignupPasswordnomatch: "page.signUp.passwordNoMatch",
+    pageSignupExistingemail: "page.signUp.existingEmail",
+    pageAppTitle: "page.app.title",
+    buttonLogin: "button.login",
+    buttonLogout: "button.logout",
+    buttonRegister: "button.register",
+    formLabelEmail: "form.label.email",
+    formLabelPassword: "form.label.password",
+    formLabelPasswordconfirmation: "form.label.passwordConfirmation",
+};

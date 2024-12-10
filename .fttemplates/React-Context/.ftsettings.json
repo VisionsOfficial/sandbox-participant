@@ -1,0 +1,4 @@
+{
+    "omitParentDirectory": true,
+    "openFilesWhenDone": ["<FTName | capitalize>Provider.tsx"]
+}

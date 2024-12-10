@@ -1,0 +1,40 @@
+version: "3.5"
+services:
+    provider-api:
+        container_name: provider-api
+        build:
+            context: ../../
+            dockerfile: docker/app/Dockerfile
+            args:
+                ENV: ${NODE_ENV}
+                WHO: ${WHO}
+        restart: unless-stopped
+        tty: true
+        volumes:
+            - "../../src/:/usr/src/app/src"
+        ports:
+            - "3010:3000"
+        env_file:
+            - .env
+        links:
+            - mongodb1
+        environment:
+            MONGO_URI: ${MONGO_URI}
+        networks:
+            - provider-api
+
+    mongodb1:
+        container_name: "provider-api-mongodb"
+        build:
+            context: ../../
+            dockerfile: docker/mongodb/Dockerfile
+        #    Uncomment to connect mongodb container to mongo compass or another service
+        ports:
+            - "27018:27017"
+        networks:
+            - provider-api
+
+networks:
+    provider-api:
+        external: false
+        name: provider-api

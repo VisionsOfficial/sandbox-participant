@@ -1,0 +1,54 @@
+// Colors
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$success-color: #28a745;
+$info-color: #17a2b8;
+$warning-color: #ffc107;
+$danger-color: #dc3545;
+$white-color: #ececec;
+
+// Typography
+$body-font-family: "Arial", sans-serif;
+$heading-font-family: "Helvetica", sans-serif;
+$base-font-size: 16px;
+$heading-font-size: 24px;
+
+// Spacing
+$base-spacing-unit: 16px;
+$margin: calc($base-spacing-unit / 2);
+$padding: calc($base-spacing-unit / 2);
+
+// Border Radius
+$border-radius: 4px;
+
+// Box Shadow
+$box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+// Breakpoints
+$sm-breakpoint: 576px;
+$md-breakpoint: 768px;
+$lg-breakpoint: 992px;
+$xl-breakpoint: 1200px;
+
+// Z-index
+$z-index-header: 100;
+$z-index-modal: 200;
+
+// Forms
+$input-border-color: #ced4da;
+$input-border-radius: 4px;
+
+// Buttons
+$button-border-radius: 4px;
+$button-padding: 10px 20px;
+$button-font-size: 16px;
+
+// Navbar
+$navbar-height: 60px;
+$navbar-background-color: $primary-color;
+$navbar-text-color: #fff;
+
+// Responsive Classes
+$hide-sm: "d-none d-sm-block";
+$hide-md: "d-none d-md-block";
+$hide-lg: "d-none d-lg-block";
