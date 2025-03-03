@@ -20,23 +20,25 @@ export const infrastructureProcessing = async (
         });
         if (!body.data) {
             if (typeof body !== "object") {
-                for (const user of body) {
-                    user.score = Math.floor(Math.random() * 100);
-                }
+                body.map(
+                    (element: { score: number }) =>
+                        (element.score = Math.floor(Math.random() * 100))
+                );
             } else {
                 body.score = Math.floor(Math.random() * 100);
             }
         } else {
-            if (typeof body !== "object") {
-                for (const user of body.data) {
-                    user.score = Math.floor(Math.random() * 100);
-                }
+            if (body.data[0]._id) {
+                body.data.map(
+                    (element: { score: number }) =>
+                        (element.score = Math.floor(Math.random() * 100))
+                );
             } else {
                 body.data.score = Math.floor(Math.random() * 100);
             }
         }
         Logger.info({
-            message: `infrastructureProcessing received Body: ${JSON.stringify(
+            message: `infrastructureProcessing sending Body: ${JSON.stringify(
                 body,
                 null,
                 2

@@ -36,7 +36,6 @@ export const startServer = async (port?: number) => {
     });
 
     app.use((req: Request, res: Response, next: NextFunction) => {
-        console.log(req.headers);
         next();
     });
 
