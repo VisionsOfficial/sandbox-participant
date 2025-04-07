@@ -36,6 +36,13 @@ export const startServer = async (port?: number) => {
     });
 
     app.use((req: Request, res: Response, next: NextFunction) => {
+        Logger.info({
+            message: `Headers from requests: ${JSON.stringify(
+                req.headers,
+                null,
+                2
+            )}`,
+        });
         next();
     });
 
