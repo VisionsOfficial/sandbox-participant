@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { IUser, IUserMethods, IUserModel } from "../../types/user";
 
 export const methods = (schema: Schema<IUser, IUserModel, IUserMethods>) => {
@@ -16,7 +16,7 @@ export const methods = (schema: Schema<IUser, IUserModel, IUserMethods>) => {
 
     schema.methods.isEmailVerified = function () {
         // If user has signed in with google, let's say that its validated
-        if (this.oauth?.google?.email) return true;
+        if (this.email) return true;
         return this.verified_email;
     };
 };

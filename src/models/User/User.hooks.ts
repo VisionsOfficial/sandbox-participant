@@ -1,6 +1,6 @@
 import { CallbackWithoutResultAndOptionalError, Schema } from "mongoose";
 
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { IUser, IUserMethods, IUserModel } from "../../types/user";
 
 export const hooks = (schema: Schema<IUser, IUserModel, IUserMethods>) => {
