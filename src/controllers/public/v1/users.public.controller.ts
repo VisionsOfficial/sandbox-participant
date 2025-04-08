@@ -28,6 +28,9 @@ export const getAllUsers = async (
             .lean();
 
         // AppCache.set("users", users);
+        Logger.info({
+            message: `users sending Body: ${JSON.stringify(users, null, 2)}`,
+        });
 
         return res.json(users);
     } catch (err) {
@@ -45,6 +48,12 @@ export const createUsers = async (
 ) => {
     try {
         const users = [];
+
+        Logger.info({
+            message: `received Body: ${JSON.stringify(req.body, null, 2)}`,
+        });
+
+        const body = req.body?.data ?? req.body;
 
         if (process.env.WHO === "consumer") {
             if (req.body.length > 0) {

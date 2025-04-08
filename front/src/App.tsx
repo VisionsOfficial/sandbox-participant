@@ -8,8 +8,6 @@ function App() {
     const [userId, setUserId] = useState(null);
 
     const getIframe = async (privacyNoticeId?: string) => {
-        console.log(privacyNoticeId);
-        console.log(userId);
         if (!userId) {
             window.alert("need an user id to display the iframe");
         }

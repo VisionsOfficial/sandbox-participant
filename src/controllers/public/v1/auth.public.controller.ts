@@ -164,10 +164,6 @@ export const handleGoogleAuthCallback = async (
             } else {
                 // Re-configure the oauth data in the user's profile information
                 // because the user might've had modified his data on google
-                user.oauth.google = {
-                    ...user.oauth.google,
-                    ...data,
-                };
 
                 await user.save();
                 initializeSession(req, user.id).sessionToken;

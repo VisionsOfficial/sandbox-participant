@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { IncomingMessage, Server, ServerResponse } from "http";
@@ -33,6 +33,17 @@ export const startServer = async (port?: number) => {
 
     app.get("/health", (req: Request, res: Response) => {
         return res.status(200).send("OK");
+    });
+
+    app.use((req: Request, res: Response, next: NextFunction) => {
+        Logger.info({
+            message: `Headers from requests: ${JSON.stringify(
+                req.headers,
+                null,
+                2
+            )}`,
+        });
+        next();
     });
 
     if (config.env === "development") {

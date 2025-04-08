@@ -19,17 +19,7 @@ export interface IUser extends AllSchemas {
     email: string;
     password?: string;
     verified_email: boolean;
-
-    /**
-     * OAuth2.0 User information when using external providers such
-     * as Google / Facebook ...
-     */
-    oauth: {
-        /**
-         * User information provided by Google when using OAuth2.0
-         */
-        google: GoogleOAuthProviderSchema;
-    };
+    skills?: string[];
 }
 
 export interface IUserMethods {

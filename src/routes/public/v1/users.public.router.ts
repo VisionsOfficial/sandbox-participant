@@ -31,7 +31,7 @@ r.get(
 
 r.put(
     "/:userId",
-    [body("email").optional().isEmail()],
+    [body("email").optional().isEmail(), body("skills").optional()],
     validate,
     queryUserById,
     updateUserById
