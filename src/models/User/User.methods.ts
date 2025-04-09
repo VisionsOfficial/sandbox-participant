@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { IUser, IUserMethods, IUserModel } from "../../types/user";
 
 export const methods = (schema: Schema<IUser, IUserModel, IUserMethods>) => {
