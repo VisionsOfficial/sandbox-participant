@@ -27,6 +27,11 @@ export const infrastructureProcessing = async (
             } else {
                 body.score = Math.floor(Math.random() * 100);
             }
+        } else if (body.data.origin) {
+            body.data.origin.map(
+                (element: { score: number }) =>
+                    (element.score = Math.floor(Math.random() * 100))
+            );
         } else {
             if (body.data[0]._id) {
                 body.data.map(
