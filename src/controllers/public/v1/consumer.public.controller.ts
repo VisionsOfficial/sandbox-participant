@@ -10,7 +10,7 @@ export const consume = async (
 ) => {
     try {
         return res.json({
-            message: "Your data have been consumed.",
+            message: "Received Data.",
             dataReceived: req.body,
         });
     } catch (err) {
