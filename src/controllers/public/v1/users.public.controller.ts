@@ -57,7 +57,7 @@ export const createUsers = async (
 
         if (process.env.WHO === "consumer") {
             if (body.length > 0) {
-                for (const user of req.body) {
+                for (const user of body) {
                     const u = await User.findOneAndUpdate(
                         { _id: user._id.toString() },
                         {
@@ -101,9 +101,9 @@ export const createUsers = async (
                 }
             } else {
                 const u = await User.findOneAndUpdate(
-                    { _id: req.body._id },
+                    { _id: body._id },
                     {
-                        ...req.body,
+                        ...body,
                     },
                     {
                         upsert: true,
