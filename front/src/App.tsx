@@ -1,6 +1,7 @@
 import "./App.css";
 import axios from "axios";
 import { useState } from "react";
+import { Domain, Marketplace, SynthesisWidget } from "synthesis-widget";
 
 function App() {
     const [url, setUrl] = useState(null);
@@ -66,6 +67,13 @@ function App() {
             </div>
 
             {url && <iframe height="600" width="600" src={url}></iframe>}
+
+            <SynthesisWidget
+                queries={{
+                    domain: ["media"] as Domain[],
+                    marketplace: ["visionstrust"] as Marketplace[],
+                }}
+            />
         </>
     );
 }

@@ -125,6 +125,9 @@ importers:
       socket.io:
         specifier: ^4.6.2
         version: 4.7.2
+      synthesis-widget:
+        specifier: ^0.1.2
+        version: 0.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       typescript:
         specifier: ^5.2.2
         version: 5.8.3
@@ -3056,6 +3059,12 @@ packages:
   supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
+
+  synthesis-widget@0.1.2:
+    resolution: {integrity: sha512-HscP0RvFlZPMjkL4W23Tfvx0lNpl3lDP6f4p+Gh/jHPXGr2LiKZilNdV9SeYRXZk3ENepR5OtJqaPKMP2Y/NNg==}
+    peerDependencies:
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
 
   text-hex@1.0.0:
     resolution: {integrity: sha512-uuVGNWzgJ4yhRaNSiubPY7OjISw4sw4E5Uv0wbjp+OzcbmVU/rsT8ujgcXJhn9ypzsgr5vlzpPqP+MBBKcGvbg==}
@@ -6494,6 +6503,11 @@ snapshots:
       has-flag: 4.0.0
 
   supports-preserve-symlinks-flag@1.0.0: {}
+
+  synthesis-widget@0.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   text-hex@1.0.0: {}
 
