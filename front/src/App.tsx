@@ -68,12 +68,12 @@ function App() {
 
             {url && <iframe height="600" width="600" src={url}></iframe>}
 
-            <SynthesisWidget
-                queries={{
-                    domain: ["media"] as Domain[],
-                    marketplace: ["visionstrust"] as Marketplace[],
-                }}
-            />
+            {/*<SynthesisWidget*/}
+            {/*    queries={{*/}
+            {/*        domain: ["media"] as Domain[],*/}
+            {/*        marketplace: ["visionstrust"] as Marketplace[],*/}
+            {/*    }}*/}
+            {/*/>*/}
         </>
     );
 }
