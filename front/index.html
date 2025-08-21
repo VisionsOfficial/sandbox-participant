@@ -5,9 +5,27 @@
         <link rel="icon" type="image/svg+xml" href="/vite.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>PDI Consent modal</title>
+        <link
+            rel="stylesheet"
+            href="https://visionsofficial.github.io/synthesis-widget/css/index.css"
+        />
     </head>
     <body>
         <div id="root"></div>
         <script type="module" src="./src/main.tsx"></script>
+        <script type="module">
+            import React from "https://esm.sh/react";
+            import * as ReactDOMClient from "https://esm.sh/react-dom/client";
+            import { SynthesisWidget } from "https://esm.sh/synthesis-widget";
+
+            const root = ReactDOMClient.createRoot(document.getElementById("root"));
+            root.render(
+                React.createElement(
+                    React.StrictMode,
+                    null,
+                    React.createElement(SynthesisWidget)
+                )
+            );
+        </script>
     </body>
 </html>
