@@ -75,6 +75,7 @@
     },
     "dependencies": {
         "@socket.io/admin-ui": "^0.5.1",
+        "@tanstack/react-query": "^5.89.0",
         "@types/react": "^18.2.66",
         "@types/react-dom": "^18.2.22",
         "@typescript-eslint/eslint-plugin": "^7.2.0",
@@ -114,6 +115,7 @@
         "socket.io": "^4.6.2",
         "synthesis-widget": "^0.1.2",
         "typescript": "^5.2.2",
+        "visions-chatbot": "^0.1.2",
         "vite": "^5.2.0",
         "winston": "^3.11.0",
         "winston-daily-rotate-file": "^4.7.1"
