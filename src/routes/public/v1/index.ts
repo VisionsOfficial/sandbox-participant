@@ -4,6 +4,7 @@ import infrastructurePublicRouter from "./infrastructure.public.router";
 import prePublicRouter from "./pre.public.router";
 import lrcPublicRouter from "./lrc.public.router";
 import deIdentifierPublicRouter from "./deIdentifier.public.router";
+import chatPublicRouter from "./chat.public.router";
 
 const routers = [
     {
@@ -29,6 +30,10 @@ const routers = [
     {
         prefix: "/de-identifier",
         router: deIdentifierPublicRouter,
+    },
+    {
+        prefix: "/chat",
+        router: chatPublicRouter,
     },
 ];
 
