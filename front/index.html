@@ -102,15 +102,6 @@
         const queryClient = new QueryClient();
         const root = ReactDOMClient.createRoot(document.getElementById("root"));
 
-        <Chatbot
-            url="http://51.15.206.152:3501/v1/chat?type=report&user=0&system=0"
-            initialPrompts={[
-                "what are the data offers and IA offers of the crédit agricole",
-                "Can you explain the document?",
-                "What are the best AI offers?",
-            ]}
-        />
-
         root.render(
             React.createElement(
                 React.StrictMode,
