@@ -5,7 +5,7 @@ const r: Router = Router();
 
 r.post("/", async (req: Request, res: Response, next: NextFunction) => {
     const request = await axios.post(
-        "http://51.15.206.152:3501/v1/chat?type=rag&user=0&system=0",
+        "http://51.15.206.152:3501/v1/chat?type=report&user=0&system=0",
         {
             message: req.body.message,
         }
