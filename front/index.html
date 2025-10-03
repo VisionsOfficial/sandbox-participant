@@ -95,7 +95,7 @@
         import React from "https://esm.sh/react";
         import * as ReactDOMClient from "https://esm.sh/react-dom/client";
         import { QueryClient, QueryClientProvider } from "https://esm.sh/@tanstack/react-query";
-        import { Chatbot } from "https://esm.sh/visions-chatbot@0.2.0";
+        import { Chatbot } from "https://esm.sh/visions-chatbot@0.4.0";
         import { SynthesisWidget } from "https://esm.sh/synthesis-widget";
 
 
@@ -122,11 +122,54 @@
                             },
                             React.createElement(Chatbot, {
                                 url: "https://consumer-api-8d96fe5950ea.herokuapp.com/api/chat?type=report&user=0&system=0",
-                                initialPrompts: [
-                                    "what are the data offers and IA offers of the crédit agricole",
-                                    "Can you explain the document?",
-                                    "What are the best AI offers?",
-                                ]
+                                welcomeMessages:{
+                                    report: (
+                                        <div style={{ userSelect: "text", marginInline: "auto" }}>
+                                            <div style={{ marginBottom: 12 }}>
+                                                <p>👋 Welcome to the VisionsTrust chatbot!</p>
+                                                <p>
+                                                    I help you discover how your data and AI can be better used in
+                                                    data spaces.
+                                                </p>
+                                            </div>
+
+                                            <p>👉 To begin, can you indicate :</p>
+                                            <ul style={{ listStyle: "inside", paddingLeft: 16 }}>
+                                                <li>🏢 The name of your organization</li>
+                                                <li>✍️ A brief description in a few lines (optional)</li>
+                                            </ul>
+                                        </div>
+                                    ),
+                                    agent: (
+                                        <div style={{ userSelect: "text", marginInline: "auto" }}>
+                                            <div style={{ marginBottom: 12 }}>
+                                                <p>🔎 Welcome to Agent Search!</p>
+                                                <p>
+                                                    I'm here to help you explore the Synthesis catalog and find
+                                                    what you need.
+                                                </p>
+                                            </div>
+
+                                            <p>👉 Ask me your question directly or choose an option:</p>
+                                        </div>
+                                    ),
+                                },
+                                customPrompts: {
+                                    generic: [
+                                        "Can you explain the document?",
+                                        "What are the best AI offers?",
+                                    ],
+                                    report: [
+                                        "Can you explain the document?",
+                                        "Can you resume the document?",
+                                    ],
+                                    agent: [
+                                        "🔎 Explore existing data",
+                                        "🤖 Discover AI services",
+                                        "☁️ Connect cloud services / infrastructure",
+                                        "❓ I don't know yet, guide me",
+                                    ],
+                                }
                             })
                         ),
                         React.createElement("div", {
