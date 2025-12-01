@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import { User } from "../models";
 import { userSeed } from "./users.seed";
 import { loadMongoose } from "../config/mongoose";
-import { Logger } from "../libs/loggers";
 
 const runSeed = async () => {
     try {

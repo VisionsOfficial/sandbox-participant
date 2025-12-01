@@ -8,6 +8,7 @@ export const userSchema = new Schema<IUser, IUserModel, IUserMethods>(
         verified_email: { type: Boolean, default: false },
         skills: [{ type: String }],
         schema_version: { type: String, default: "1" },
+        score: { type: Number },
     },
     {
         timestamps: true,

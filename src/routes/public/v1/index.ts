@@ -8,6 +8,7 @@ import csvPublicRouter from "./csv.public.router";
 import pdfPublicRouter from "./pdf.public.router";
 import binPublicRouter from "./bin.public.router";
 import sqlPublicRouter from "./sql.public.router";
+import chatPublicRouter from "./chat.public.router";
 
 const routers = [
     {
@@ -33,6 +34,10 @@ const routers = [
     {
         prefix: "/de-identifier",
         router: deIdentifierPublicRouter,
+    },
+    {
+        prefix: "/chat",
+        router: chatPublicRouter,
     },
     {
         prefix: "/csv",

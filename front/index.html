@@ -1,16 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My React App</title>
-</head>
-<body>
-<!-- The root element where your React app will be mounted -->
-<div id="root"></div>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>PDI Consent modal</title>
+        <link
+            rel="stylesheet"
+            href="https://visionsofficial.github.io/visions-cdn-packages/css/synthesis-widget.css"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <style type="text/tailwindcss">
+            :root {
+                --radius: 0.625rem;
+                --background: oklch(1 0 0);
+                --foreground: oklch(0.145 0 0);
+                --card: oklch(1 0 0);
+                --card-foreground: oklch(0.145 0 0);
+                --popover: oklch(1 0 0);
+                --popover-foreground: oklch(0.145 0 0);
+                --primary: oklch(0.205 0 0);
+                --primary-foreground: oklch(0.985 0 0);
+                --vui-primary: oklch(0.7 0.1 194);
+                --vui-primary-foreground: oklch(0.985 0 0);
+                --secondary: oklch(0.97 0 0);
+                --secondary-foreground: oklch(0.205 0 0);
+                --muted: oklch(0.97 0 0);
+                --muted-foreground: oklch(0.556 0 0);
+                --accent: oklch(0.97 0 0);
+                --accent-foreground: oklch(0.205 0 0);
+                --destructive: oklch(0.577 0.245 27.325);
+                --border: oklch(0.922 0 0);
+                --input: oklch(0.922 0 0);
+                --ring: oklch(0.708 0 0);
+                --chart-1: oklch(0.646 0.222 41.116);
+                --chart-2: oklch(0.6 0.118 184.704);
+                --chart-3: oklch(0.398 0.07 227.392);
+                --chart-4: oklch(0.828 0.189 84.429);
+                --chart-5: oklch(0.769 0.188 70.08);
+                --sidebar: oklch(0.985 0 0);
+                --sidebar-foreground: oklch(0.145 0 0);
+                --sidebar-primary: oklch(0.205 0 0);
+                --sidebar-primary-foreground: oklch(0.985 0 0);
+                --sidebar-accent: oklch(0.97 0 0);
+                --sidebar-accent-foreground: oklch(0.205 0 0);
+                --sidebar-border: oklch(0.922 0 0);
+                --sidebar-ring: oklch(0.708 0 0);
+            }
 
-<!-- Main script that Vite will bundle and load -->
-<script type="module" src="./src/App.tsx"></script> <!-- Use .js or .tsx based on your setup -->
-</body>
+            @theme inline {
+                --radius-sm: calc(var(--radius) - 4px);
+                --radius-md: calc(var(--radius) - 2px);
+                --radius-lg: var(--radius);
+                --radius-xl: calc(var(--radius) + 4px);
+                --color-background: var(--background);
+                --color-foreground: var(--foreground);
+                --color-card: var(--card);
+                --color-card-foreground: var(--card-foreground);
+                --color-popover: var(--popover);
+                --color-popover-foreground: var(--popover-foreground);
+                --color-primary: var(--primary);
+                --color-primary-foreground: var(--primary-foreground);
+                --color-vui-primary: var(--vui-primary);
+                --color-vui-primary-foreground: var(--vui-primary-foreground);
+                --color-secondary: var(--secondary);
+                --color-secondary-foreground: var(--secondary-foreground);
+                --color-muted: var(--muted);
+                --color-muted-foreground: var(--muted-foreground);
+                --color-accent: var(--accent);
+                --color-accent-foreground: var(--accent-foreground);
+                --color-destructive: var(--destructive);
+                --color-border: var(--border);
+                --color-input: var(--input);
+                --color-ring: var(--ring);
+                --color-chart-1: var(--chart-1);
+                --color-chart-2: var(--chart-2);
+                --color-chart-3: var(--chart-3);
+                --color-chart-4: var(--chart-4);
+                --color-chart-5: var(--chart-5);
+                --color-sidebar: var(--sidebar);
+                --color-sidebar-foreground: var(--sidebar-foreground);
+                --color-sidebar-primary: var(--sidebar-primary);
+                --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+                --color-sidebar-accent: var(--sidebar-accent);
+                --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+                --color-sidebar-border: var(--sidebar-border);
+                --color-sidebar-ring: var(--sidebar-ring);
+            }
+        </style>
+    </head>
+    <body>
+    <div id="root"></div>
+    <script type="module">
+        import React from "https://esm.sh/react";
+        import * as ReactDOMClient from "https://esm.sh/react-dom/client";
+        import { QueryClient, QueryClientProvider } from "https://esm.sh/@tanstack/react-query";
+        import { Chatbot } from "https://esm.sh/visions-chatbot@0.4.0";
+        import { SynthesisWidget } from "https://esm.sh/synthesis-widget";
+
+
+        const queryClient = new QueryClient();
+        const root = ReactDOMClient.createRoot(document.getElementById("root"));
+
+        root.render(
+            React.createElement(
+                React.StrictMode,
+                null,
+                React.createElement(
+                    QueryClientProvider,
+                    { client: queryClient },
+                    React.createElement(
+                        React.Fragment,
+                        null,
+                        React.createElement("div", {
+                                style: {
+                                    position: "fixed",
+                                    bottom: "20px",
+                                    right: "0px",
+                                    transform: "translateY(-60px)" // décale vers le haut
+                                }
+                            },
+                            React.createElement(Chatbot, {
+                                url: "https://consumer-api-8d96fe5950ea.herokuapp.com/api/chat?type=report&user=0&system=0",
+                                welcomeMessages:{
+                                    report: (
+                                        <div style={{ userSelect: "text", marginInline: "auto" }}>
+                                            <div style={{ marginBottom: 12 }}>
+                                                <p>👋 Welcome to the VisionsTrust chatbot!</p>
+                                                <p>
+                                                    I help you discover how your data and AI can be better used in
+                                                    data spaces.
+                                                </p>
+                                            </div>
+
+                                            <p>👉 To begin, can you indicate :</p>
+                                            <ul style={{ listStyle: "inside", paddingLeft: 16 }}>
+                                                <li>🏢 The name of your organization</li>
+                                                <li>✍️ A brief description in a few lines (optional)</li>
+                                            </ul>
+                                        </div>
+                                    ),
+                                    agent: (
+                                        <div style={{ userSelect: "text", marginInline: "auto" }}>
+                                            <div style={{ marginBottom: 12 }}>
+                                                <p>🔎 Welcome to Agent Search!</p>
+                                                <p>
+                                                    I'm here to help you explore the Synthesis catalog and find
+                                                    what you need.
+                                                </p>
+                                            </div>
+
+                                            <p>👉 Ask me your question directly or choose an option:</p>
+                                        </div>
+                                    ),
+                                },
+                                customPrompts: {
+                                    generic: [
+                                        "Can you explain the document?",
+                                        "What are the best AI offers?",
+                                    ],
+                                    report: [
+                                        "Can you explain the document?",
+                                        "Can you resume the document?",
+                                    ],
+                                    agent: [
+                                        "🔎 Explore existing data",
+                                        "🤖 Discover AI services",
+                                        "☁️ Connect cloud services / infrastructure",
+                                        "❓ I don't know yet, guide me",
+                                    ],
+                                }
+                            })
+                        ),
+                        React.createElement("div", {
+                                style: {
+                                    position: "fixed",
+                                    bottom: "20px",
+                                    right: "20px",
+                                }
+                            },
+                            React.createElement(SynthesisWidget)
+                        )
+                    )
+                )
+            )
+        );
+    </script>
+    </body>
 </html>

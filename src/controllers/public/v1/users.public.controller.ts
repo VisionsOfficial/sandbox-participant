@@ -56,10 +56,10 @@ export const createUsers = async (
         const body = req.body?.data ?? req.body;
 
         if (process.env.WHO === "consumer") {
-            if (body > 0) {
+            if (body.length > 0) {
                 for (const user of body) {
                     const u = await User.findOneAndUpdate(
-                        { _id: user._id },
+                        { _id: user._id.toString() },
                         {
                             ...user,
                             verified_email: true,
@@ -73,7 +73,7 @@ export const createUsers = async (
                 }
             } else {
                 const u = await User.findOneAndUpdate(
-                    { _id: body._id },
+                    { _id: body._id.toString() },
                     {
                         ...body,
                     },

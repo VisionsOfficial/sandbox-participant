@@ -9,8 +9,10 @@ import {
     getUserById,
 } from "../../../controllers/public/v1/users.public.controller";
 import { passthroughMe } from "../../middlewares/passthrough.middleware";
+import { authenticate } from "../../middlewares/auth.middleware";
 import {
     deleteUserById,
+    getCurrentUser,
     updateUserById,
 } from "../../../controllers/private/v1/users.private.controller";
 
