@@ -25,8 +25,11 @@ export const startServer = async (port?: number) => {
 
     app.use(cors({ origin: true, credentials: true }));
     app.use(cookieParser());
-    app.use(express.json({ limit: "1gb" }));
-    app.use(express.urlencoded({ limit: "1gb", extended: true }));
+    app.use(express.text({ type: 'text/csv', limit: "2gb"  }));
+    app.use(express.text({ type: 'application/pdf', limit: "2gb" }));
+    app.use(express.text({ type: 'application/octet-stream', limit: "2gb"  }));
+    app.use(express.json({ limit: "2gb" }));
+    app.use(express.urlencoded({ limit: "2gb", extended: true }));
 
     app.set("views", [path.join(__dirname, "vue")]);
     app.set("view engine", "ejs");
@@ -39,6 +42,13 @@ export const startServer = async (port?: number) => {
         Logger.info({
             message: `Headers from requests: ${JSON.stringify(
                 req.headers,
+                null,
+                2
+            )}`,
+        });
+        Logger.info({
+            message: `body from requests: ${JSON.stringify(
+                req.body,
                 null,
                 2
             )}`,

@@ -6,6 +6,9 @@ const MIME_TYPES: { [key: string]: string } = {
     "image/jpg": "jpg",
     "image/jpeg": "jpg",
     "image/png": "png",
+    "text/csv": "csv",
+    "application/pdf": "pdf",
+    "application/octet-stream": "bin",
 };
 
 const storage = multer.diskStorage({
