@@ -1,4 +1,5 @@
 import { Router } from "express";
+import path from "path";
 import axios from "axios";
 
 const r: Router = Router();
@@ -7,14 +8,19 @@ r.get("/", async (req, res) => {
     try {
         const userId = "65646d4320ec42ff2e719706";
         const DSCAdminJWT =
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXJ2aWNlS2V5IjoiQTVkdzY5OHNuWGlKUlZmYjZjTTR1RDd3M2JDTWdhbllKZ2VIWmZERGNIcE41QnlESmJOUE1XQm50TktCYVhqTlJ6dVd6NzRRUDlHVU5ZWEdxR2plVWJNMzY3YUhaTnNaRlNKNCIsIm9yaWdpbiI6Imh0dHBzOi8vcHJvdmlkZXItYXBpLWE3MDc2NWEyMjBhNC5oZXJva3VhcHAuY29tIiwiaWF0IjoxNzEyMjQzMTA3NTg0fQ.uVY_D6L1jeighZgi024sUgyo3XvCj0q56YgXIb7HRaQ";
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXJ2aWNlS2V5IjoiMXRBVGlLN0UzQTFIM2Rfd0lpVVhPdExDS2tXWlpLQV9wMlgwZ3drRG1GeHBmQ0Y0STNJc2xyZG1rUERfMzhhVFRyQXpJUVVMaXhVV2NCSWxCRnlCY3lVOHN4RFJVWk1YX09UYyIsIm9yaWdpbiI6Imh0dHBzOi8veW91ci11cmwuY29tIiwiaWF0IjoxNzEyNTY3ODUzMTk5fQ.Lh8M8EF8caRtdcFuY9P2bE2qFEvJl0odzJ1A49n0HwY";
+        const origin = req.headers["x-forwarded-proto"]
+            ? `${req.headers["x-forwarded-proto"]}://${req.headers.host}`
+            : req.headers.host;
+
+        const url = "http://localhost:3333";
 
         //get available exchanges
         const exchangesResponse = await axios.get(
-            "https://provider-data-connector-253244a6c16c.herokuapp.com/private/pdi/exchanges/provider",
+            `${url}/private/pdi/exchanges/provider`,
             {
                 headers: {
-                    origin: `${req.headers["x-forwarded-proto"]}://${req.headers.host}`,
+                    origin,
                     Authorization: `Bearer ${DSCAdminJWT}`,
                 },
             }
@@ -22,10 +28,10 @@ r.get("/", async (req, res) => {
 
         //get privacy notices
         const privacyNoticesResponse = await axios.get(
-            `https://provider-data-connector-253244a6c16c.herokuapp.com/private/pdi/${userId}/aHR0cHM6Ly9hcGkudmlzaW9uc3RydXN0LmNvbS92MS9jYXRhbG9nL3BhcnRpY2lwYW50cy82NTZkZmIzZTI4MmQ0N2NmYTZiNjZiMzA=/aHR0cHM6Ly9hcGkudmlzaW9uc3RydXN0LmNvbS92MS9jYXRhbG9nL3BhcnRpY2lwYW50cy82NTZkZmIzZTI4MmQ0N2NmYTZiNjZiMmE=`,
+            `${url}/private/pdi/${userId}/${exchangesResponse.data.content.participant.base64SelfDescription}/${exchangesResponse.data.content.exchanges[0].base64SelfDescription}`,
             {
                 headers: {
-                    origin: `${req.headers["x-forwarded-proto"]}://${req.headers.host}`,
+                    origin,
                     Authorization: `Bearer ${DSCAdminJWT}`,
                 },
             }
@@ -34,7 +40,7 @@ r.get("/", async (req, res) => {
         res.render("index", {
             userId,
             DSCAdminJWT,
-            privacyNoticeEndpoint: `https://provider-data-connector-253244a6c16c.herokuapp.com/private/consent/${userId}/privacy-notices/65e9f407de244c2a18764332`,
+            privacyNoticeEndpoint: `${url}/private/consent/${userId}/privacy-notices/${privacyNoticesResponse.data.content[3]._id}`,
         });
     } catch (e) {
         res.render("error", {

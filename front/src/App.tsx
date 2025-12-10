@@ -1,6 +1,6 @@
+import "./App.css";
 import axios from "axios";
 import { useState } from "react";
-import ReactDOM from "react-dom/client";
 
 function App() {
     const [url, setUrl] = useState(null);
@@ -12,21 +12,16 @@ function App() {
             window.alert("need an user id to display the iframe");
         }
         const login = await axios.post(
-            // "https://provider-data-connector-253244a6c16c.herokuapp.com/login",
-            "http://localhost:3333/login",
+            "https://provider-data-connector-253244a6c16c.herokuapp.com/login",
             {
-                // serviceKey:
-                //     "A5dw698snXiJRVfb6cM4uD7w3bCMganYJgeHZfDDcHpN5ByDJbNPMWBntNKBaXjNRzuWz74QP9GUNYXGqGjeUbM367aHZNsZFSJ4",
                 serviceKey:
-                    "MLLgUPxnnZLxOAu5tbl_p9Bx_GKJFWJLVkic4jHOirGJjD_6zEbzcCosAhCw7zV_VA9fPYy_vdRkZLuebUAUoQgjAPZGPuI9zaXg",
-                // secretKey: "BG9QZQHj7o2UtXC",
-                secretKey:
-                    "xxRfHgwyb8OGYVuvdn13fwa8glsaFFwzB12laHzqoPs0PFw7HcA1DP6X8wkqEfZ4feUTwfdXO9WHGzlPwstMrE4FJVllcIl5U4nG",
+                    "A5dw698snXiJRVfb6cM4uD7w3bCMganYJgeHZfDDcHpN5ByDJbNPMWBntNKBaXjNRzuWz74QP9GUNYXGqGjeUbM367aHZNsZFSJ4",
+                secretKey: "BG9QZQHj7o2UtXC",
             }
         );
 
         const iframe = await axios.get(
-            `http://localhost:3333/private/pdi?userId=${userId}${
+            `https://provider-data-connector-253244a6c16c.herokuapp.com/private/pdi?userId=${userId}${
                 privacyNoticeId ? `&privacyNoticeId=${privacyNoticeId}` : ""
             }`,
             {
@@ -62,6 +57,7 @@ function App() {
                     onChange={(e) => setUserId(e.target.value)}
                 />
             </div>
+            <div>TEST</div>
             <div>
                 <button onClick={() => getIframe(privacyNoticeId)}>
                     privacy Notice
@@ -74,8 +70,5 @@ function App() {
         </>
     );
 }
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
 
 export default App;

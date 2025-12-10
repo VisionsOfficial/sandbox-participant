@@ -20,6 +20,7 @@ export interface IUser extends AllSchemas {
     password?: string;
     verified_email: boolean;
     skills?: string[];
+    score?: number;
 }
 
 export interface IUserMethods {

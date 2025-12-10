@@ -9,7 +9,7 @@ export default defineConfig({
     server: {
         port: 3000,
         proxy: {
-            "/api": "http://localhost:3321", // Assuming your backend runs on port 3000
+            "/api": "http://localhost:3001", // Assuming your backend runs on port 3000
         },
     },
     build: {

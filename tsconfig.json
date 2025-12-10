@@ -12,7 +12,16 @@
         "allowJs": true,
         "lib": ["ES2021.String", "ES7", "dom"],
         "typeRoots": ["./src/types"],
-        "resolveJsonModule": true
+        "resolveJsonModule": true,
+
+        "useDefineForClassFields": true,
+        "skipLibCheck": true,
+        //
+        //        /* Bundler mode */
+        //        "allowImportingTsExtensions": true,
+        "isolatedModules": true,
+        //        "emitDeclarationOnly": true,
+        "jsx": "react-jsx"
     },
     "include": ["src/**/*", "scripts"]
 }
