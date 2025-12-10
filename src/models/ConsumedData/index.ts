@@ -1,0 +1,1 @@
+export { ConsumedData } from "./ConsumedData";
