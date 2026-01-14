@@ -9,6 +9,7 @@ import pdfPublicRouter from "./pdf.public.router";
 import binPublicRouter from "./bin.public.router";
 import sqlPublicRouter from "./sql.public.router";
 import chatPublicRouter from "./chat.public.router";
+import nlpPublicRouter from "./nlp.public.router";
 
 const routers = [
     {
@@ -54,6 +55,10 @@ const routers = [
     {
         prefix: "/sql",
         router: sqlPublicRouter,
+    },
+    {
+        prefix: "/nlp",
+        router: nlpPublicRouter,
     },
 ];
 
