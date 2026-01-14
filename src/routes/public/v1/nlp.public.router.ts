@@ -12,6 +12,7 @@ const validKeys = [
     "Biologie"
 ];
 
+//open data from https://www.data.gouv.fr/datasets/dossiers-fictifs-de-medecine-generale for HDT / EMS NLP endpoint testing
 const dossierFictif = [
     {
         "sex": "Femme",
@@ -309,7 +310,12 @@ r.get("/", (req: Request, res: Response, next: NextFunction) => {
 r.get("/:id", (req: Request, res: Response, next: NextFunction) => {
     const id = parseInt(req.params.id);
 
-    if(isNaN(id) || id < 0 || id >= dossierFictif.length) {
+    if(isNaN(id)) {
+        next();
+        return;
+    }
+
+    if(id < 0 || id >= dossierFictif.length) {
         return res.status(400).json({error: "Invalid id"});
     }
 
