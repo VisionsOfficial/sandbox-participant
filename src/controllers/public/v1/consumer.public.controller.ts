@@ -45,7 +45,7 @@ export const consumeRaw = async (
                 2
             )}`,
         });
-        return res.json(body);
+        return res.json(body?.data ?? body);
     } catch (err) {
         next(err);
     }
