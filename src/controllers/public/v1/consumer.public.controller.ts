@@ -29,6 +29,29 @@ export const consume = async (
 };
 
 /**
+ * Consumer the data
+ */
+export const consumeRaw = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const body = req.body;
+        Logger.info({
+            message: `infrastructureProcessing received Body: ${JSON.stringify(
+                body,
+                null,
+                2
+            )}`,
+        });
+        return res.json(body);
+    } catch (err) {
+        next(err);
+    }
+};
+
+/**
  * Consumer the data and store it
  */
 export const consumeAndStore = async (

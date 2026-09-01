@@ -10,6 +10,7 @@ import binPublicRouter from "./bin.public.router";
 import sqlPublicRouter from "./sql.public.router";
 import chatPublicRouter from "./chat.public.router";
 import nlpPublicRouter from "./nlp.public.router";
+import skillsPublicRouter from "./skills.public.router";
 
 const routers = [
     {
@@ -59,6 +60,10 @@ const routers = [
     {
         prefix: "/nlp",
         router: nlpPublicRouter,
+    },
+    {
+        prefix: "/skills",
+        router: skillsPublicRouter,
     },
 ];
 
