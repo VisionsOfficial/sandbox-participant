@@ -16,7 +16,7 @@
         "consumer": "pnpm nodemon -L --consumer",
         "infrastructure": "pnpm nodemon -L --infrastructure",
         "start": "npm-run-all --parallel start-back vite-production",
-        "start-back": "node dist/src/index.js",
+        "start-back": "node dist/src/index.js --production",
         "staging": "node dist/index.js",
         "dev:env": "pnpx nodemon",
         "build": "npm-run-all --parallel build-backend build-front",
