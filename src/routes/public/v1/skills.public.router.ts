@@ -6,6 +6,35 @@ import {Logger} from "../../../libs/loggers";
 
 const r: Router = Router();
 
+/**
+ * @openapi
+ * /skills:
+ *   get:
+ *     tags: [Mock data]
+ *     summary: Get a static list of skills
+ *     responses:
+ *       200:
+ *         description: List of skills
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   name:
+ *                     type: string
+ *                   level:
+ *                     type: string
+ *                     enum: [Beginner, Intermediate, Advanced]
+ *             example:
+ *               - name: Communication
+ *                 level: Advanced
+ *               - name: Teamwork
+ *                 level: Intermediate
+ *       500:
+ *         $ref: '#/components/responses/ServerError'
+ */
 r.get('/', async (req, res) => {
     try {
 

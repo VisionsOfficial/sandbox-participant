@@ -19,14 +19,10 @@ export const infrastructureProcessing = async (
             )}`,
         });
         if (!body.data) {
-            if (typeof body !== "object") {
-                body.map(
-                    (element: { score: number }) =>
-                        (element.score = Math.floor(Math.random() * 100))
-                );
-            } else {
-                body.score = Math.floor(Math.random() * 100);
-            }
+            body.map(
+                (element: { score: number }) =>
+                    (element.score = Math.floor(Math.random() * 100))
+            );
         } else if (body.data.origin) {
             body.data.origin.map(
                 (element: { score: number }) =>

@@ -5,6 +5,28 @@ import PDFDocument from 'pdfkit';
 
 const r: Router = Router();
 
+/**
+ * @openapi
+ * /pdf:
+ *   get:
+ *     tags: [Files]
+ *     summary: Generate a PDF file of a given size
+ *     description: Generates a Lorem Ipsum PDF whose size approaches the requested size (about 5% margin).
+ *     parameters:
+ *       - $ref: '#/components/parameters/Size'
+ *     responses:
+ *       200:
+ *         description: PDF file (attachment)
+ *         content:
+ *           application/pdf:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *       400:
+ *         $ref: '#/components/responses/InvalidSize'
+ *       500:
+ *         $ref: '#/components/responses/ServerError'
+ */
 r.get('/', async (req, res) => {
     try {
         const targetSizeStr = (req.query.size as string)?.toUpperCase() || "1KB";
@@ -82,6 +104,47 @@ r.get('/', async (req, res) => {
     }
 });
 
+/**
+ * @openapi
+ * /pdf:
+ *   post:
+ *     tags: [Files]
+ *     summary: Upload a PDF file
+ *     description: Receives a PDF file, answers according to `responseType`, then deletes the file.
+ *     parameters:
+ *       - name: responseType
+ *         in: query
+ *         required: false
+ *         description: "`pdf` returns the file, `json` returns its metadata, omitted returns `{ message: \"ok\" }`"
+ *         schema:
+ *           type: string
+ *           enum: [pdf, json]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               file:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       200:
+ *         description: Depends on `responseType`
+ *         content:
+ *           application/pdf:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *           application/json:
+ *             schema:
+ *               oneOf:
+ *                 - $ref: '#/components/schemas/UploadedFile'
+ *                 - $ref: '#/components/schemas/Message'
+ *       500:
+ *         description: Unsupported file type or read error
+ */
 r.post('/', upload.single('file'), async (req, res) => {
     const { responseType } = req.query;
 

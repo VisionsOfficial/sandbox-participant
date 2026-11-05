@@ -9,6 +9,8 @@ import { instrument } from "@socket.io/admin-ui";
 import { Logger, morganLogs } from "./libs/loggers";
 import { Server as SocketioServer } from "socket.io";
 import path from "path";
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./config/swagger";
 
 export type AppServer = {
     app: express.Application;
@@ -37,6 +39,11 @@ export const startServer = async (port?: number) => {
     app.get("/health", (req: Request, res: Response) => {
         return res.status(200).send("OK");
     });
+
+    app.get("/docs.json", (req: Request, res: Response) => {
+        return res.json(swaggerSpec);
+    });
+    app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
     app.use((req: Request, res: Response, next: NextFunction) => {
         Logger.info({

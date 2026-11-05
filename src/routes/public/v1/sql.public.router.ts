@@ -6,6 +6,37 @@ import {Logger} from "../../../libs/loggers";
 
 const r: Router = Router();
 
+/**
+ * @openapi
+ * /sql:
+ *   get:
+ *     tags: [Files]
+ *     summary: Generate a SQL script of a given size
+ *     description: Generates a `CREATE TABLE users` statement followed by an `INSERT` of fake users, sized to approach the requested size.
+ *     parameters:
+ *       - $ref: '#/components/parameters/Size'
+ *     responses:
+ *       200:
+ *         description: SQL script
+ *         content:
+ *           text/plain:
+ *             schema:
+ *               type: string
+ *             example: |
+ *               CREATE TABLE users (
+ *                   id SERIAL PRIMARY KEY,
+ *                   nom VARCHAR(255),
+ *                   email VARCHAR(255),
+ *                   date TIMESTAMP
+ *               );
+ *
+ *               INSERT INTO users (id, nom, email, date) VALUES
+ *               (1, 'User 1', 'user1@example.com', '2026-11-05T10:00:00.000Z');
+ *       400:
+ *         $ref: '#/components/responses/InvalidSize'
+ *       500:
+ *         $ref: '#/components/responses/ServerError'
+ */
 r.get('/', async (req, res) => {
     try {
         // Récupérer la taille souhaitée (ex: "10KB", "5MB", "1GB")

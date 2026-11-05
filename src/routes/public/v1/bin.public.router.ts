@@ -4,6 +4,28 @@ import fs from "fs";
 
 const r: Router = Router();
 
+/**
+ * @openapi
+ * /bin:
+ *   get:
+ *     tags: [Files]
+ *     summary: Generate a binary file of a given size
+ *     description: Generates a file of random bytes of exactly the requested size.
+ *     parameters:
+ *       - $ref: '#/components/parameters/Size'
+ *     responses:
+ *       200:
+ *         description: Binary file (attachment)
+ *         content:
+ *           application/octet-stream:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *       400:
+ *         $ref: '#/components/responses/InvalidSize'
+ *       500:
+ *         $ref: '#/components/responses/ServerError'
+ */
 r.get('/', async (req, res) => {
     try {
         const targetSizeStr = (req.query.size as string)?.toUpperCase() || "1KB";
@@ -44,6 +66,47 @@ r.get('/', async (req, res) => {
     }
 });
 
+/**
+ * @openapi
+ * /bin:
+ *   post:
+ *     tags: [Files]
+ *     summary: Upload a binary file
+ *     description: Receives a binary file (`application/octet-stream`), answers according to `responseType`, then deletes the file.
+ *     parameters:
+ *       - name: responseType
+ *         in: query
+ *         required: false
+ *         description: "`bin` returns the file, `json` returns its metadata, omitted returns `{ message: \"ok\" }`"
+ *         schema:
+ *           type: string
+ *           enum: [bin, json]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               file:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       200:
+ *         description: Depends on `responseType`
+ *         content:
+ *           application/octet-stream:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *           application/json:
+ *             schema:
+ *               oneOf:
+ *                 - $ref: '#/components/schemas/UploadedFile'
+ *                 - $ref: '#/components/schemas/Message'
+ *       500:
+ *         description: Unsupported file type or read error
+ */
 r.post('/', upload.single('file'), async (req, res) => {
     const { responseType } = req.query;
 

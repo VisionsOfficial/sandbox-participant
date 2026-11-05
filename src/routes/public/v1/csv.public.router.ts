@@ -6,6 +6,28 @@ import {Logger} from "../../../libs/loggers";
 
 const r: Router = Router();
 
+/**
+ * @openapi
+ * /csv:
+ *   get:
+ *     tags: [Files]
+ *     summary: Generate a CSV file of a given size
+ *     description: Generates a CSV of fake users (id, nom, email, date), padded with empty rows to reach the requested size.
+ *     parameters:
+ *       - $ref: '#/components/parameters/Size'
+ *     responses:
+ *       200:
+ *         description: CSV file (attachment)
+ *         content:
+ *           text/csv:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *       400:
+ *         $ref: '#/components/responses/InvalidSize'
+ *       500:
+ *         $ref: '#/components/responses/ServerError'
+ */
 r.get('/', async (req, res) => {
     try {
         // Récupérer la taille souhaitée (ex: "10KB", "5MB", "1GB")
@@ -81,6 +103,47 @@ r.get('/', async (req, res) => {
     }
 });
 
+/**
+ * @openapi
+ * /csv:
+ *   post:
+ *     tags: [Files]
+ *     summary: Upload a CSV file
+ *     description: Receives a CSV file, answers according to `responseType`, then deletes the file.
+ *     parameters:
+ *       - name: responseType
+ *         in: query
+ *         required: false
+ *         description: "`csv` returns the file, `json` returns its metadata, omitted returns `{ message: \"ok\" }`"
+ *         schema:
+ *           type: string
+ *           enum: [csv, json]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               file:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       200:
+ *         description: Depends on `responseType`
+ *         content:
+ *           text/csv:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *           application/json:
+ *             schema:
+ *               oneOf:
+ *                 - $ref: '#/components/schemas/UploadedFile'
+ *                 - $ref: '#/components/schemas/Message'
+ *       500:
+ *         description: Unsupported file type or read error
+ */
 r.post('/', upload.single('file'), async (req, res) => {
     const { responseType } = req.query;
 

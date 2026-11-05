@@ -297,6 +297,24 @@ const dossierFictif = [
     }
 ]
 
+/**
+ * @openapi
+ * /nlp:
+ *   get:
+ *     tags: [NLP]
+ *     summary: Get the consultation texts of all records
+ *     responses:
+ *       200:
+ *         description: The `Text` field of every consultation
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Texts'
+ *             example:
+ *               texts:
+ *                 - toux
+ *                 - Aptsport / Pas de prescription
+ */
 r.get("/", (req: Request, res: Response, next: NextFunction) => {
     return res.json({
         "texts": dossierFictif.flatMap((element) =>
@@ -307,6 +325,43 @@ r.get("/", (req: Request, res: Response, next: NextFunction) => {
     });
 });
 
+/**
+ * @openapi
+ * /nlp/{idOrKey}:
+ *   get:
+ *     tags: [NLP]
+ *     summary: Get the texts of one record, or one field of all records
+ *     description: |
+ *       - numeric value: the `Text` field of every consultation of the record at this index (0 to 10)
+ *       - otherwise: the given field of every consultation of all records. Unknown fields fall back to `Text`.
+ *     parameters:
+ *       - name: idOrKey
+ *         in: path
+ *         required: true
+ *         description: "Record index, or one of: Date_consultation, Text, Resultat_consultation, Prescription, Accident_travail, Biometrie, Biologie"
+ *         schema:
+ *           type: string
+ *           example: Prescription
+ *     responses:
+ *       200:
+ *         description: Texts
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Texts'
+ *             example:
+ *               texts:
+ *                 - PROZAC / LEXOMYL
+ *                 - PAROXETINE
+ *       400:
+ *         description: Record index out of range
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *             example:
+ *               error: Invalid id
+ */
 r.get("/:id", (req: Request, res: Response, next: NextFunction) => {
     const id = parseInt(req.params.id);
 
@@ -342,6 +397,44 @@ r.get("/:key", (req: Request, res: Response, next: NextFunction) => {
     });
 });
 
+/**
+ * @openapi
+ * /nlp/{key}/{id}:
+ *   get:
+ *     tags: [NLP]
+ *     summary: Get one field of the consultations of one record
+ *     parameters:
+ *       - name: key
+ *         in: path
+ *         required: true
+ *         description: Consultation field. An unknown field returns an empty list.
+ *         schema:
+ *           type: string
+ *           enum: [Date_consultation, Text, Resultat_consultation, Prescription, Accident_travail, Biometrie, Biologie]
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: Record index
+ *         schema:
+ *           type: integer
+ *           minimum: 0
+ *           maximum: 10
+ *     responses:
+ *       200:
+ *         description: Texts
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Texts'
+ *       400:
+ *         description: Invalid record index
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *             example:
+ *               error: Invalid id
+ */
 r.get("/:key/:id", (req: Request, res: Response, next: NextFunction) => {
     const id = parseInt(req.params.id);
     let key = req.params.key;
