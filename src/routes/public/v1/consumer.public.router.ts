@@ -3,6 +3,8 @@ import {
     consume,
     consumeAndStore,
     consumeRaw,
+    getStoredData,
+    getStoredDataById,
 } from "../../../controllers/public/v1/consumer.public.controller";
 
 const r: Router = Router();
@@ -104,5 +106,73 @@ r.post("/consume/raw", consumeRaw);
  *         $ref: '#/components/responses/ServerError'
  */
 r.post("/consume/store", consumeAndStore);
+
+/**
+ * @openapi
+ * /consume/store:
+ *   get:
+ *     tags: [Consumer]
+ *     summary: List stored data
+ *     description: Lists the data stored through POST /consume/store, most recent first. Payloads larger than 256KB are omitted (payloadOmitted is true), use GET /consume/store/{id} to get them.
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           default: 25
+ *           maximum: 100
+ *     responses:
+ *       200:
+ *         description: A page of stored data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 total:
+ *                   type: integer
+ *                 page:
+ *                   type: integer
+ *                 limit:
+ *                   type: integer
+ *                 pages:
+ *                   type: integer
+ *                 items:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *       500:
+ *         $ref: '#/components/responses/ServerError'
+ */
+r.get("/consume/store", getStoredData);
+
+/**
+ * @openapi
+ * /consume/store/{id}:
+ *   get:
+ *     tags: [Consumer]
+ *     summary: Get one stored data entry
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: The stored entry with its full payload and headers
+ *       400:
+ *         description: Invalid id
+ *       404:
+ *         description: Not found
+ *       500:
+ *         $ref: '#/components/responses/ServerError'
+ */
+r.get("/consume/store/:id", getStoredDataById);
 
 export default r;

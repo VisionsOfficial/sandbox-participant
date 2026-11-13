@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { isValidObjectId } from "mongoose";
 import { ConsumedData } from "../../../models";
 import { Logger } from '../../../libs/loggers';
 
@@ -72,6 +73,88 @@ export const consumeAndStore = async (
             dataReceived: req.body,
             storedId: consumedData._id,
         });
+    } catch (err) {
+        next(err);
+    }
+};
+
+/**
+ * Payloads above this size (in bytes) are not embedded in the list response,
+ * the viewer loads them on demand through the detail route.
+ */
+const LIST_PAYLOAD_MAX_BYTES = 256 * 1024;
+
+/**
+ * Lists the stored data, most recent first
+ */
+export const getStoredData = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const limit = Math.min(
+            Math.max(parseInt(req.query.limit as string) || 25, 1),
+            100
+        );
+        const page = Math.max(parseInt(req.query.page as string) || 1, 1);
+
+        const [total, items] = await Promise.all([
+            ConsumedData.countDocuments(),
+            ConsumedData.aggregate([
+                { $sort: { createdAt: -1, _id: -1 } },
+                { $skip: (page - 1) * limit },
+                { $limit: limit },
+                { $addFields: { size: { $bsonSize: "$$ROOT" } } },
+                {
+                    $addFields: {
+                        payloadOmitted: {
+                            $gt: ["$size", LIST_PAYLOAD_MAX_BYTES],
+                        },
+                    },
+                },
+                {
+                    $addFields: {
+                        payload: {
+                            $cond: ["$payloadOmitted", "$$REMOVE", "$payload"],
+                        },
+                    },
+                },
+            ]).allowDiskUse(true),
+        ]);
+
+        return res.json({
+            total,
+            page,
+            limit,
+            pages: Math.max(Math.ceil(total / limit), 1),
+            items,
+        });
+    } catch (err) {
+        next(err);
+    }
+};
+
+/**
+ * Returns one stored data entry with its full payload
+ */
+export const getStoredDataById = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        if (!isValidObjectId(req.params.id)) {
+            return res.status(400).json({ message: "Invalid id." });
+        }
+
+        const consumedData = await ConsumedData.findById(req.params.id).lean();
+
+        if (!consumedData) {
+            return res.status(404).json({ message: "Stored data not found." });
+        }
+
+        return res.json(consumedData);
     } catch (err) {
         next(err);
     }

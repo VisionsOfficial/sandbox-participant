@@ -9,6 +9,7 @@ import { instrument } from "@socket.io/admin-ui";
 import { Logger, morganLogs } from "./libs/loggers";
 import { Server as SocketioServer } from "socket.io";
 import path from "path";
+import fs from "fs";
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./config/swagger";
 
@@ -35,6 +36,18 @@ export const startServer = async (port?: number) => {
 
     app.set("views", [path.join(__dirname, "vue")]);
     app.set("view engine", "ejs");
+
+    // Storage viewer (data stored through POST /consume/store), served on the
+    // same host/port as the API. Resolved from src/ (ts-node) or dist/src/ (build).
+    const viewerFile = [
+        path.join(__dirname, "..", "public", "storage-viewer", "index.html"),
+        path.join(__dirname, "..", "..", "public", "storage-viewer", "index.html"),
+    ].find((file) => fs.existsSync(file));
+    if (viewerFile) {
+        app.get(["/", "/storage"], (req: Request, res: Response) => {
+            return res.sendFile(viewerFile);
+        });
+    }
 
     app.get("/health", (req: Request, res: Response) => {
         return res.status(200).send("OK");
