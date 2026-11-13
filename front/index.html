@@ -99,6 +99,7 @@
         import { SynthesisWidget } from "https://esm.sh/synthesis-widget";
 
 
+        const h = React.createElement;
         const queryClient = new QueryClient();
         const root = ReactDOMClient.createRoot(document.getElementById("root"));
 
@@ -123,35 +124,41 @@
                             React.createElement(Chatbot, {
                                 url: "https://consumer-api-8d96fe5950ea.herokuapp.com/api/chat?type=report&user=0&system=0",
                                 welcomeMessages:{
-                                    report: (
-                                        <div style={{ userSelect: "text", marginInline: "auto" }}>
-                                            <div style={{ marginBottom: 12 }}>
-                                                <p>👋 Welcome to the VisionsTrust chatbot!</p>
-                                                <p>
-                                                    I help you discover how your data and AI can be better used in
-                                                    data spaces.
-                                                </p>
-                                            </div>
-
-                                            <p>👉 To begin, can you indicate :</p>
-                                            <ul style={{ listStyle: "inside", paddingLeft: 16 }}>
-                                                <li>🏢 The name of your organization</li>
-                                                <li>✍️ A brief description in a few lines (optional)</li>
-                                            </ul>
-                                        </div>
+                                    report: h(
+                                        "div",
+                                        { style: { userSelect: "text", marginInline: "auto" } },
+                                        h(
+                                            "div",
+                                            { style: { marginBottom: 12 } },
+                                            h("p", null, "👋 Welcome to the VisionsTrust chatbot!"),
+                                            h(
+                                                "p",
+                                                null,
+                                                "I help you discover how your data and AI can be better used in data spaces."
+                                            )
+                                        ),
+                                        h("p", null, "👉 To begin, can you indicate :"),
+                                        h(
+                                            "ul",
+                                            { style: { listStyle: "inside", paddingLeft: 16 } },
+                                            h("li", null, "🏢 The name of your organization"),
+                                            h("li", null, "✍️ A brief description in a few lines (optional)")
+                                        )
                                     ),
-                                    agent: (
-                                        <div style={{ userSelect: "text", marginInline: "auto" }}>
-                                            <div style={{ marginBottom: 12 }}>
-                                                <p>🔎 Welcome to Agent Search!</p>
-                                                <p>
-                                                    I'm here to help you explore the Synthesis catalog and find
-                                                    what you need.
-                                                </p>
-                                            </div>
-
-                                            <p>👉 Ask me your question directly or choose an option:</p>
-                                        </div>
+                                    agent: h(
+                                        "div",
+                                        { style: { userSelect: "text", marginInline: "auto" } },
+                                        h(
+                                            "div",
+                                            { style: { marginBottom: 12 } },
+                                            h("p", null, "🔎 Welcome to Agent Search!"),
+                                            h(
+                                                "p",
+                                                null,
+                                                "I'm here to help you explore the Synthesis catalog and find what you need."
+                                            )
+                                        ),
+                                        h("p", null, "👉 Ask me your question directly or choose an option:")
                                     ),
                                 },
                                 customPrompts: {

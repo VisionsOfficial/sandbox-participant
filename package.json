@@ -19,7 +19,7 @@
         "start-back": "node dist/src/index.js --production",
         "staging": "node dist/index.js",
         "dev:env": "pnpx nodemon",
-        "build": "npm-run-all --parallel build-backend build-front",
+        "build": "npm-run-all build-backend build-front",
         "build-backend": "rimraf ./dist && tsc",
         "build-front": "vite build",
         "test": "ts-mocha -p tsconfig.json tests/**/*.spec.ts --timeout 4000",
