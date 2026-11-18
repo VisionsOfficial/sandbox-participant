@@ -53,6 +53,60 @@ export const consumeRaw = async (
 };
 
 /**
+ * Consumer the data
+ */
+export const cadastral = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const body = req.body;
+        Logger.info({
+            message: `received Body: ${JSON.stringify(
+                body,
+                null,
+                2
+            )}`,
+        });
+        return res.json({
+            "type": "FeatureCollection",
+            "properties": {
+                "message": "No spatial features provided",
+                "analysis": {
+                    "finland": {
+                        "count": 0,
+                        "avg_area": 0,
+                        "median_area": 0,
+                        "min_area": 0,
+                        "max_area": 0,
+                        "avg_perimeter": 0,
+                        "median_perimeter": 0,
+                        "avg_compactness": 0,
+                        "median_compactness": 0
+                    },
+                    "estonia": {
+                        "count": 0,
+                        "avg_area": 0,
+                        "median_area": 0,
+                        "min_area": 0,
+                        "max_area": 0,
+                        "avg_perimeter": 0,
+                        "median_perimeter": 0,
+                        "avg_compactness": 0,
+                        "median_compactness": 0
+                    }
+                },
+                "differences": {}
+            },
+            "features": []
+        });
+    } catch (err) {
+        next(err);
+    }
+};
+
+/**
  * Consumer the data and store it
  */
 export const consumeAndStore = async (

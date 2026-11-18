@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+    cadastral,
     consume,
     consumeAndStore,
     consumeRaw,
@@ -70,6 +71,32 @@ r.post("/consume", consume);
  *               hello: world
  */
 r.post("/consume/raw", consumeRaw);
+
+/**
+ * @openapi
+ * /consume/cadastral:
+ *   post:
+ *     tags: [Consumer]
+ *     summary: Receive data and return it raw
+ *     description: Returns the `data` property of the payload if present, otherwise the whole payload.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema: {}
+ *           example:
+ *             data:
+ *               hello: world
+ *     responses:
+ *       200:
+ *         description: The received data, unwrapped
+ *         content:
+ *           application/json:
+ *             schema: {}
+ *             example:
+ *               hello: world
+ */
+r.post("/consume/cadastral", cadastral);
 
 /**
  * @openapi
